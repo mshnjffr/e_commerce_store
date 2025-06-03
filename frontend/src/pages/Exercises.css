@@ -1,0 +1,396 @@
+.exercises-page {
+  min-height: 60vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.page-header p {
+  font-size: 1.2rem;
+  color: #6b7280;
+}
+
+.exercises-content {
+  margin-bottom: 3rem;
+}
+
+.exercise-section {
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  color: #1f2937;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.exercise-item {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 1.5rem;
+  transition: all 0.2s;
+}
+
+.exercise-item:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-color: #2563eb;
+}
+
+.exercise-number {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.exercise-content {
+  flex: 1;
+}
+
+.exercise-content h3 {
+  color: #1f2937;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.exercise-description {
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.exercise-tasks {
+  margin-bottom: 1.5rem;
+}
+
+.exercise-tasks h4 {
+  color: #374151;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.exercise-tasks ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.exercise-tasks li {
+  background: #f8fafc;
+  border-left: 3px solid #2563eb;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0 6px 6px 0;
+  color: #374151;
+  line-height: 1.5;
+  position: relative;
+}
+
+.exercise-tasks li:before {
+  content: "→";
+  color: #2563eb;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.exercise-tasks code {
+  background: #e5e7eb;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.9rem;
+  color: #1f2937;
+}
+
+.tips-box {
+  background: #f0f9ff;
+  border: 1px solid #0ea5e9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.tips-box h4 {
+  color: #0c4a6e;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.tips-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tips-box li {
+  color: #0c4a6e;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.tips-box li:before {
+  content: "💡";
+  position: absolute;
+  left: 0;
+}
+
+.troubleshooting-box {
+  background: #fef2f2;
+  border: 1px solid #f87171;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.troubleshooting-box h4 {
+  color: #dc2626;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.troubleshooting-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.troubleshooting-box li {
+  color: #7f1d1d;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.troubleshooting-box li:before {
+  content: "🔧";
+  position: absolute;
+  left: 0;
+}
+
+.success-criteria {
+  background: #f0fdf4;
+  border: 1px solid #22c55e;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.success-criteria h4 {
+  color: #15803d;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.success-criteria ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.success-criteria li {
+  color: #15803d;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.success-criteria li:before {
+  content: "✅";
+  position: absolute;
+  left: 0;
+}
+
+.api-reference {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.api-reference h4 {
+  color: #475569;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.api-endpoint {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 1rem;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.api-endpoint strong {
+  color: #dc2626;
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.api-endpoint ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.api-endpoint li {
+  color: #475569;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  font-size: 0.9rem;
+}
+
+.api-endpoint li strong {
+  color: #1e293b;
+  font-size: 0.9rem;
+  display: inline;
+  margin-right: 0.5rem;
+}
+
+.difficulty-level {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.difficulty-level.junior {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.difficulty-level.intermediate {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.difficulty-level.senior {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.tips-section {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  margin-top: 2rem;
+}
+
+.tips-section h2 {
+  color: #1f2937;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.tip-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.tip-card h4 {
+  color: #1f2937;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.tip-card p {
+  color: #6b7280;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+
+  .exercises-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .exercise-card {
+    padding: 1.5rem;
+  }
+
+  .coming-soon {
+    padding: 2rem 1rem;
+  }
+
+  .coming-soon h2 {
+    font-size: 1.5rem;
+  }
+}
+
+.error-message {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 1rem 0;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: #dc2626;
+}
