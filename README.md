@@ -4,12 +4,7 @@ A full-stack e-commerce application featuring a FastAPI backend and React TypeSc
 
 ## 🎯 Project Purpose
 
-This project serves as a **practical training platform** for developers learning to work with AI coding assistants. It provides real-world scenarios and comprehensive exercises that teach:
-
-- 🤖 **AI Assistant Integration**: How to effectively use Cody for code generation, debugging, and refactoring
-- 🔧 **Hands-on Exercises**: 5 progressive exercises covering beginner to advanced scenarios
-- 🏗️ **Production-ready Patterns**: Best practices for full-stack development with React and FastAPI
-- 🐛 **Realistic Debugging**: Intentional bugs and challenges that mirror real development issues
+This project serves as a **practical training platform** for developers learning to work with Cody. It provides real-world scenarios.
 
 ## ✨ Features
 
@@ -206,13 +201,6 @@ pytest --cov=.           # Run with coverage
 pytest -v               # Verbose output
 ```
 
-**Test Coverage**:
-- ✅ Authentication endpoints
-- ✅ Product endpoints (laptops & mice)
-- ✅ Order management (create, read, update, delete)
-- ✅ Mixed product order functionality
-- ✅ Error handling and validation
-- ✅ JWT token authentication
 
 ### Frontend Testing
 ```bash
@@ -229,8 +217,4 @@ Username: john_doe     | Password: password123
 Username: jane_smith   | Password: securepass456
 ```
 
-### Sample Products
-- **10 Latest Laptops**: MacBook Pro M4, Dell XPS 13, ThinkPad X1, etc.
-- **12 Modern Mice**: MX Master 3S, DeathAdder V3, Rival 650, etc.
-- **Realistic Pricing**: Market-accurate prices and specifications
-- **Stock Management**: Varied stock quantities for testing
+
