@@ -75,42 +75,61 @@ frontend/
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- **Python 3.8+** with pip
-- **Node.js 16+** with npm
-- **Git** for version control
+### 🐳 Option 1: Docker (Recommended - Solves All Dependency Issues)
 
-### 1. Clone and Setup Backend
+**Prerequisites**: Docker Desktop installed
+
 ```bash
 # Clone the repository
 git clone <repository-url>
 cd laptop-store
 
-# Setup backend
+# Start the application with Docker
+./scripts/docker-setup.sh
+# Choose option 1 for production or option 2 for development
+
+# Or manually:
+docker-compose up --build -d
+```
+
+**Access the application**:
+- **Main App**: http://localhost:3000
+- **Exercises**: http://localhost:3000/exercises  
+- **API Docs**: http://localhost:8000/docs
+- **Backend Health**: http://localhost:8000
+
+📖 **Detailed Docker Guide**: See [DOCKER.md](DOCKER.md) for complete setup instructions
+
+### 🛠️ Option 2: Local Development
+
+**Prerequisites**: Python 3.8+, Node.js 16+, Git
+
+#### Backend Setup
+```bash
 cd backend
+
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
 
 # Run backend server
 python main.py
 ```
-Backend will be available at `http://localhost:8000`
 
-### 2. Setup Frontend
+#### Frontend Setup
 ```bash
-# In a new terminal, setup frontend
+# In a new terminal
 cd frontend
 npm install
-
-# Start development server
 npm start
 ```
-Frontend will be available at `http://localhost:3000`
 
-### 3. Access the Application
-- **Main App**: http://localhost:3000
-- **Exercises**: http://localhost:3000/exercises
-- **API Docs**: http://localhost:8000/docs
-- **Backend Health**: http://localhost:8000
+**Access the application**:
+- **Frontend**: http://localhost:3000
+- **Backend**: http://localhost:8000
 
 ## 🎓 AI Assistant Training Exercises
 
