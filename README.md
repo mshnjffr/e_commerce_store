@@ -4,7 +4,12 @@ A full-stack e-commerce application featuring a FastAPI backend and React TypeSc
 
 ## 🎯 Project Purpose
 
-This project serves as a **practical training platform** for developers learning to work with Cody. It provides real-world scenarios and comprehensive exercises that teach:
+This project serves as a **practical training platform** for developers learning to work with AI coding assistants. It provides real-world scenarios and comprehensive exercises that teach:
+
+- 🤖 **AI Assistant Integration**: How to effectively use Cody for code generation, debugging, and refactoring
+- 🔧 **Hands-on Exercises**: 5 progressive exercises covering beginner to advanced scenarios
+- 🏗️ **Production-ready Patterns**: Best practices for full-stack development with React and FastAPI
+- 🐛 **Realistic Debugging**: Intentional bugs and challenges that mirror real development issues
 
 ## ✨ Features
 
@@ -215,34 +220,6 @@ cd frontend
 npm test                 # Run tests in watch mode
 npm run test:coverage    # Run with coverage report
 ```
-
-## 🔧 Key Technical Features
-
-### Advanced Cart System
-- **Mixed Products**: Single cart supports both laptops and mice
-- **Persistent State**: Cart survives browser refreshes and sessions
-- **Smart Validation**: Stock quantity checking and quantity limits
-- **Unified Checkout**: Single checkout flow for mixed product orders
-
-### Authentication & Security
-- **JWT Tokens**: Secure authentication with automatic refresh
-- **Protected Routes**: Route-level security with redirect handling
-- **Password Security**: bcrypt hashing with salt
-- **Input Validation**: Comprehensive Pydantic validation on backend
-
-### Modern React Patterns
-- **TypeScript**: Full type safety throughout frontend
-- **Context API**: Global state management for auth and cart
-- **Custom Hooks**: Reusable logic extraction
-- **Error Boundaries**: Graceful error handling
-- **Responsive Design**: Mobile-first CSS with modern layouts
-
-### FastAPI Best Practices
-- **SOLID Principles**: Clean architecture with separation of concerns
-- **Service Layer**: Business logic abstraction
-- **Dependency Injection**: FastAPI DI for authentication
-- **Auto-documentation**: OpenAPI/Swagger integration
-- **Error Handling**: Consistent HTTP error responses
 
 ## 🌟 Sample Data
 

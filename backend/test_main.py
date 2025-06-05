@@ -1,21 +1,23 @@
 """Tests for the laptop store API."""
 
 import pytest
+import time
 from fastapi.testclient import TestClient
 from main import app
 
 client = TestClient(app)
 
-# Test data
+# Test data - use unique username with timestamp to avoid conflicts
+timestamp = str(int(time.time()))
 test_user_data = {
-    "username": "testuser",
-    "email": "test@example.com",
-    "password": "testpassword123"
+    "username": f"test_user_{timestamp}", 
+    "email": f"testuser_{timestamp}@example.com",
+    "password": "testpass123"
 }
 
 login_data = {
-    "username": "testuser", 
-    "password": "testpassword123"
+    "username": "john_doe",
+    "password": "password123"
 }
 
 # Global token storage for tests
@@ -67,6 +69,41 @@ class TestLaptops:
         assert response.json()["detail"] == "Laptop not found"
 
 
+class TestMice:
+    """Test mice endpoints."""
+    
+    def test_get_all_mice(self):
+        """Test getting all mice."""
+        response = client.get("/api/v1/mice")
+        assert response.status_code == 200
+        data = response.json()
+        assert isinstance(data, list)
+        assert len(data) == 12  # We inserted 12 sample mice
+        
+        # Check first mouse structure
+        mouse = data[0]
+        required_fields = ["id", "brand", "model", "mouse_type", "connectivity", 
+                          "dpi", "buttons", "rgb_lighting", "weight_grams", 
+                          "price", "stock_quantity", "created_at"]
+        for field in required_fields:
+            assert field in mouse
+    
+    def test_get_mouse_by_id(self):
+        """Test getting mouse by ID."""
+        response = client.get("/api/v1/mice/1")
+        assert response.status_code == 200
+        data = response.json()
+        assert data["id"] == 1
+        assert "brand" in data
+        assert "model" in data
+    
+    def test_get_mouse_not_found(self):
+        """Test getting non-existent mouse."""
+        response = client.get("/api/v1/mice/999")
+        assert response.status_code == 404
+        assert response.json()["detail"] == "Mouse not found"
+
+
 class TestUsers:
     """Test user endpoints."""
     
@@ -91,7 +128,12 @@ class TestUsers:
     def test_login_user(self):
         """Test user login."""
         global auth_token
-        response = client.post("/api/v1/users/login", json=login_data)
+        # Login with the user we just registered
+        test_login_data = {
+            "username": test_user_data["username"],
+            "password": test_user_data["password"]
+        }
+        response = client.post("/api/v1/users/login", json=test_login_data)
         assert response.status_code == 200
         data = response.json()
         assert "access_token" in data
@@ -114,8 +156,12 @@ class TestOrders:
         """Setup for order tests."""
         global auth_token
         if not auth_token:
-            # Login to get token
-            response = client.post("/api/v1/users/login", json=login_data)
+            # Login to get token - use the registered test user
+            test_login_data = {
+                "username": test_user_data["username"],
+                "password": test_user_data["password"]
+            }
+            response = client.post("/api/v1/users/login", json=test_login_data)
             auth_token = response.json()["access_token"]
     
     def test_create_order(self):
@@ -124,8 +170,8 @@ class TestOrders:
         headers = {"Authorization": f"Bearer {auth_token}"}
         order_data = {
             "items": [
-                {"laptop_id": 1, "quantity": 1},
-                {"laptop_id": 2, "quantity": 2}
+                {"laptop_id": 1, "mice_id": None, "quantity": 1, "unit_price": 2999.99},
+                {"laptop_id": 2, "mice_id": None, "quantity": 2, "unit_price": 1299.99}
             ]
         }
         
@@ -136,6 +182,35 @@ class TestOrders:
         assert "total_amount" in data
         assert len(data["items"]) == 2
         assert data["status"] == "pending"
+    
+    def test_create_mixed_order(self):
+        """Test creating an order with both laptops and mice."""
+        global auth_token
+        headers = {"Authorization": f"Bearer {auth_token}"}
+        mixed_order_data = {
+            "items": [
+                {"laptop_id": 1, "mice_id": None, "quantity": 1, "unit_price": 2999.99},
+                {"laptop_id": None, "mice_id": 1, "quantity": 2, "unit_price": 99.99}
+            ]
+        }
+        
+        response = client.post("/api/v1/orders", json=mixed_order_data, headers=headers)
+        assert response.status_code == 201
+        data = response.json()
+        assert "id" in data
+        assert "total_amount" in data
+        assert len(data["items"]) == 2
+        assert data["status"] == "pending"
+        
+        # Verify the items are correctly stored
+        items = data["items"]
+        laptop_item = next(item for item in items if item["laptop_id"] is not None)
+        mouse_item = next(item for item in items if item["mice_id"] is not None)
+        
+        assert laptop_item["laptop_id"] == 1
+        assert laptop_item["mice_id"] is None
+        assert mouse_item["laptop_id"] is None
+        assert mouse_item["mice_id"] == 1
     
     def test_get_user_orders(self):
         """Test getting user orders."""
@@ -178,7 +253,7 @@ class TestOrders:
         # Update order
         update_data = {
             "items": [
-                {"laptop_id": 3, "quantity": 1}
+                {"laptop_id": 3, "mice_id": None, "quantity": 1, "unit_price": 2499.99}
             ]
         }
         
@@ -196,7 +271,7 @@ class TestOrders:
         # Create a new order to delete
         order_data = {
             "items": [
-                {"laptop_id": 4, "quantity": 1}
+                {"laptop_id": 4, "mice_id": None, "quantity": 1, "unit_price": 2199.99}
             ]
         }
         response = client.post("/api/v1/orders", json=order_data, headers=headers)
@@ -225,7 +300,7 @@ class TestOrders:
         headers = {"Authorization": f"Bearer {auth_token}"}
         order_data = {
             "items": [
-                {"laptop_id": 1, "quantity": 1000}  # More than available stock
+                {"laptop_id": 1, "mice_id": None, "quantity": 1000, "unit_price": 2999.99}  # More than available stock
             ]
         }
         
@@ -233,6 +308,7 @@ class TestOrders:
         assert response.status_code == 422  # Validation error for quantity > 100
         # Update to test with valid quantity but insufficient stock
         order_data["items"][0]["quantity"] = 50  # Valid but more than stock
+        order_data["items"][0]["unit_price"] = 2999.99
         response = client.post("/api/v1/orders", json=order_data, headers=headers)
         assert response.status_code == 400
         assert "Insufficient stock" in response.json()["detail"]
@@ -243,7 +319,7 @@ class TestOrders:
         headers = {"Authorization": f"Bearer {auth_token}"}
         order_data = {
             "items": [
-                {"laptop_id": 999, "quantity": 1}  # Non-existent laptop
+                {"laptop_id": 999, "mice_id": None, "quantity": 1, "unit_price": 1999.99}  # Non-existent laptop
             ]
         }
         
@@ -291,7 +367,7 @@ class TestValidation:
         # Invalid quantity
         invalid_data = {
             "items": [
-                {"laptop_id": 1, "quantity": 0}  # Invalid quantity
+                {"laptop_id": 1, "mice_id": None, "quantity": 0, "unit_price": 2999.99}  # Invalid quantity
             ]
         }
         response = client.post("/api/v1/orders", json=invalid_data, headers=headers)
