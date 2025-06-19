@@ -116,6 +116,7 @@ const Login: React.FC = () => {
 
           {errors.general && (
             <div className="general-error">
+              {/* BUG: This will crash when errors.general is a string instead of an object */}
               {(errors.general as any).message.toUpperCase()}
             </div>
           )}

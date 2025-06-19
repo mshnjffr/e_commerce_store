@@ -66,10 +66,20 @@ const Exercises: React.FC = () => {
                 </p>
                 <div className="exercise-tasks">
                   <h4>🚨 Critical Issue to Solve:</h4>
-                  <p>💥 The application crashes with TypeScript error when users enter wrong login credentials. Users see a compilation error overlay instead of proper error message.</p>
+                  <p>💥 The application crashes with TypeScript error when users enter wrong login credentials. Users see a blank page or error boundary instead of proper error message.</p>
                   
-                  <h4>Current Error:</h4>
+                  <h4>How to Reproduce:</h4>
+                  <ol>
+                    <li>Open browser Developer Tools (F12) → Console tab</li>
+                    <li>Go to <code>/login</code> page</li>
+                    <li>Enter wrong credentials (e.g., username: "wrong", password: "wrong")</li>
+                    <li>Click "Sign In"</li>
+                    <li>Page crashes → Check console for TypeScript error</li>
+                  </ol>
+                  
+                  <h4>Expected Error in Console:</h4>
                   <div className="error-message">
+                    <code>TypeError: Cannot read properties of undefined (reading 'toUpperCase')</code><br/>
                     <code>TS2339: Property 'message' does not exist on type 'string | &#123; message: string; timestamp: number &#125;'</code>
                   </div>
                   
