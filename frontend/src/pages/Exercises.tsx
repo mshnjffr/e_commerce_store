@@ -11,16 +11,6 @@ const Exercises: React.FC = () => {
         </div>
 
         <div className="exercises-content">
-          <div className="intro-section">
-            <h2>📋 How to Use These Exercises with Cody</h2>
-            <div className="cody-instructions">
-              <p><strong>📁 File Selection:</strong> Each exercise step lists specific files to add to your Cody chat. Use the <code>@</code> symbol to reference files.</p>
-              <p><strong>💡 Prompting:</strong> Copy the provided prompts exactly, then customize with your specific context.</p>
-              <p><strong>🔄 Iterative:</strong> Build step by step - each step provides files needed for the next step.</p>
-              <p><strong>🎯 Focus:</strong> One exercise step = one focused Cody conversation.</p>
-            </div>
-          </div>
-
           <div className="exercise-section">
             <h2 className="section-title">🚀 Getting Started</h2>
             
@@ -38,67 +28,27 @@ const Exercises: React.FC = () => {
                   <h4>Tasks to complete with Advanced Prompts:</h4>
                   <ul>
                     <li><strong>Step 1: Frontend Architecture Analysis</strong>
-                      <br />📁 <em>Files to provide to Cody:</em>
-                      <ul>
-                        <li><code>frontend/src/App.tsx</code> - Main routing and app structure</li>
-                        <li><code>frontend/src/components/Layout/Header.tsx</code> - Navigation structure</li>
-                        <li><code>frontend/src/contexts/CartContext.tsx</code> - State management example</li>
-                        <li><code>frontend/src/contexts/AuthContext.tsx</code> - Authentication state</li>
-                        <li><code>frontend/src/pages/Laptops.tsx</code> - Page component example</li>
-                        <li><code>frontend/src/services/api.ts</code> - API service layer</li>
-                      </ul>
+                      <br />📁 <code>frontend/src/App.tsx</code>, <code>frontend/src/components/Layout/Header.tsx</code>, <code>frontend/src/contexts/CartContext.tsx</code>, <code>frontend/src/contexts/AuthContext.tsx</code>, <code>frontend/src/pages/Laptops.tsx</code>, <code>frontend/src/services/api.ts</code>
                       <br />💡 <strong>Chain-of-Thought Prompt:</strong> "Walk me through the React frontend architecture step by step. First, explain the overall folder structure based on these files, then describe how routing works in App.tsx, followed by component organization in Layout/, and finally explain the state management approach used in CartContext.tsx."
                     </li>
                     
                     <li><strong>Step 2: Java Spring Boot Backend Analysis</strong>
-                      <br />📁 <em>Files to provide to Cody:</em>
-                      <ul>
-                        <li><code>backend/pom.xml</code> - Maven dependencies</li>
-                        <li><code>backend/src/main/java/com/example/laptopstore/LaptopStoreApplication.java</code> - Main app</li>
-                        <li><code>backend/src/main/java/com/example/laptopstore/controller/LaptopController.java</code> - Controller example</li>
-                        <li><code>backend/src/main/java/com/example/laptopstore/service/LaptopService.java</code> - Service layer</li>
-                        <li><code>backend/src/main/java/com/example/laptopstore/repository/LaptopRepository.java</code> - Repository layer</li>
-                        <li><code>backend/src/main/java/com/example/laptopstore/entity/Laptop.java</code> - JPA entity</li>
-                        <li><code>backend/src/main/java/com/example/laptopstore/security/SecurityConfig.java</code> - Security config</li>
-                      </ul>
+                      <br />📁 <code>backend/pom.xml</code>, <code>backend/src/main/java/com/example/laptopstore/LaptopStoreApplication.java</code>, <code>backend/src/main/java/com/example/laptopstore/controller/LaptopController.java</code>, <code>backend/src/main/java/com/example/laptopstore/service/LaptopService.java</code>, <code>backend/src/main/java/com/example/laptopstore/repository/LaptopRepository.java</code>, <code>backend/src/main/java/com/example/laptopstore/entity/Laptop.java</code>, <code>backend/src/main/java/com/example/laptopstore/security/SecurityConfig.java</code>
                       <br />💡 <strong>Role-Based Prompt:</strong> "Act as a Java Spring Boot expert. Analyze this backend structure. Explain: 1) The layered architecture pattern (Controller → Service → Repository), 2) How JPA entities are structured, 3) Spring Security configuration for JWT authentication, 4) Maven dependencies and their purposes."
                     </li>
                     
                     <li><strong>Step 3: Authentication Flow Deep Dive</strong>
-                      <br />📁 <em>Files to provide to Cody:</em>
-                      <ul>
-                        <li><code>frontend/src/pages/Login.tsx</code> - Login form component</li>
-                        <li><code>frontend/src/contexts/AuthContext.tsx</code> - Auth state management</li>
-                        <li><code>frontend/src/services/api.ts</code> - API calls with auth headers</li>
-                        <li><code>backend/src/main/java/com/example/laptopstore/controller/AuthController.java</code> - Backend auth endpoints</li>
-                        <li><code>backend/src/main/java/com/example/laptopstore/security/JwtUtil.java</code> - JWT utilities</li>
-                        <li><code>backend/src/main/java/com/example/laptopstore/security/JwtAuthenticationFilter.java</code> - JWT filter</li>
-                      </ul>
+                      <br />📁 <code>frontend/src/pages/Login.tsx</code>, <code>frontend/src/contexts/AuthContext.tsx</code>, <code>frontend/src/services/api.ts</code>, <code>backend/src/main/java/com/example/laptopstore/controller/AuthController.java</code>, <code>backend/src/main/java/com/example/laptopstore/security/JwtUtil.java</code>, <code>backend/src/main/java/com/example/laptopstore/security/JwtAuthenticationFilter.java</code>
                       <br />💡 <strong>Few-Shot Prompting:</strong> "Help me understand the authentication flow by showing examples. First, trace what happens when a user logs in: Frontend: Login form → API call, Backend: JWT generation, Frontend: Token storage. Then show how protected routes work when accessing `/api/v1/orders`."
                     </li>
                     
                     <li><strong>Step 4: Shopping Cart Implementation</strong>
-                      <br />📁 <em>Files to provide to Cody:</em>
-                      <ul>
-                        <li><code>frontend/src/contexts/CartContext.tsx</code> - Cart state management</li>
-                        <li><code>frontend/src/pages/Cart.tsx</code> - Cart UI component</li>
-                        <li><code>frontend/src/components/Laptop/LaptopCard.tsx</code> - Add to cart functionality</li>
-                        <li><code>frontend/src/components/Layout/Header.tsx</code> - Cart count display</li>
-                      </ul>
+                      <br />📁 <code>frontend/src/contexts/CartContext.tsx</code>, <code>frontend/src/pages/Cart.tsx</code>, <code>frontend/src/components/Laptop/LaptopCard.tsx</code>, <code>frontend/src/components/Layout/Header.tsx</code>
                       <br />💡 <strong>Self-Consistency Prompt:</strong> "Explain the shopping cart from three perspectives: 1) User Experience: How does adding/removing work from UI? 2) State Management: How is cart state managed (Context, localStorage)? 3) Data Flow: How does cart data flow to backend during checkout?"
                     </li>
                     
                     <li><strong>Step 5: Database Schema & Relationships</strong>
-                      <br />📁 <em>Files to provide to Cody:</em>
-                      <ul>
-                        <li><code>backend/src/main/java/com/example/laptopstore/entity/User.java</code> - User entity</li>
-                        <li><code>backend/src/main/java/com/example/laptopstore/entity/Laptop.java</code> - Laptop entity</li>
-                        <li><code>backend/src/main/java/com/example/laptopstore/entity/Mouse.java</code> - Mouse entity</li>
-                        <li><code>backend/src/main/java/com/example/laptopstore/entity/Order.java</code> - Order entity</li>
-                        <li><code>backend/src/main/java/com/example/laptopstore/entity/OrderItem.java</code> - OrderItem entity</li>
-                        <li><code>backend/src/main/resources/application.properties</code> - H2 database config</li>
-                        <li><code>backend/src/main/resources/data.sql</code> - Sample data</li>
-                      </ul>
+                      <br />📁 <code>backend/src/main/java/com/example/laptopstore/entity/User.java</code>, <code>backend/src/main/java/com/example/laptopstore/entity/Laptop.java</code>, <code>backend/src/main/java/com/example/laptopstore/entity/Mouse.java</code>, <code>backend/src/main/java/com/example/laptopstore/entity/Order.java</code>, <code>backend/src/main/java/com/example/laptopstore/entity/OrderItem.java</code>, <code>backend/src/main/resources/application.properties</code>, <code>backend/src/main/resources/data.sql</code>
                       <br />💡 <strong>Metacognitive Prompting:</strong> "I want to understand the database design. First, explain your reasoning process: How would you approach analyzing this schema? Then walk through: H2 configuration, JPA entity relationships (User, Laptop, Order, OrderItem), foreign key connections, and design decisions."
                     </li>
                   </ul>
@@ -126,20 +76,12 @@ const Exercises: React.FC = () => {
                   <h4>🧠 AI-Assisted Debugging Tasks:</h4>
                   <ul>
                     <li><strong>Step 1: Root Cause Analysis</strong>
-                    <br />📁 <em>Files to provide to Cody:</em>
-                    <ul>
-                      <li><code>frontend/src/pages/Login.tsx</code> - Login component with the bug (focus on line 119)</li>
-                      <li><code>frontend/src/types/api.ts</code> - Type definitions</li>
-                    </ul>
+                    <br />📁 <code>frontend/src/pages/Login.tsx</code>, <code>frontend/src/types/api.ts</code>
                     <br />💡 <strong>Chain-of-Thought Prompt:</strong> "Act as a TypeScript debugging expert. Let's trace this error step by step: 1) What is the exact error on line 119? 2) What type does `errors.general` have? 3) Why does `.message.toUpperCase()` fail? 4) What are the possible values of `errors.general`?"
                     </li>
                     
                     <li><strong>Step 2: Type System Understanding</strong>
-                    <br />📁 <em>Files to provide to Cody:</em>
-                    <ul>
-                      <li><code>frontend/src/contexts/AuthContext.tsx</code> - Auth context with error handling</li>
-                      <li><code>frontend/src/services/api.ts</code> - API service layer</li>
-                    </ul>
+                    <br />📁 <code>frontend/src/contexts/AuthContext.tsx</code>, <code>frontend/src/services/api.ts</code>
                     <br />💡 <strong>Self-Consistency Prompt:</strong> "Explain the type mismatch from three angles: 1) Backend perspective: What does `/api/v1/auth/login` return? 2) AuthContext perspective: How are errors processed? 3) Component perspective: What type does Login.tsx expect?"
                     </li>
                     
@@ -175,12 +117,7 @@ const Exercises: React.FC = () => {
                   <h4>Tasks with AI Mentorship:</h4>
                   <ul>
                     <li><strong>Step 1: Component Analysis & Planning</strong>
-                      <br />📁 <em>Files to provide to Cody:</em>
-                      <ul>
-                        <li><code>frontend/src/components/Laptop/LaptopCard.tsx</code> - Main component to analyze</li>
-                        <li><code>frontend/src/components/Laptop/LaptopCard.css</code> - Current styling</li>
-                        <li><code>frontend/src/contexts/CartContext.tsx</code> - Example of localStorage usage</li>
-                      </ul>
+                      <br />📁 <code>frontend/src/components/Laptop/LaptopCard.tsx</code>, <code>frontend/src/components/Laptop/LaptopCard.css</code>, <code>frontend/src/contexts/CartContext.tsx</code>
                       <br />💡 <strong>Mentor Prompt:</strong> "Act as a React mentor for beginners. Analyze this LaptopCard component and explain: 1) Current structure and props, 2) Where I should add a favorite heart icon, 3) What React concepts I'll need (useState, event handlers, conditional rendering), 4) How localStorage integration works."
                     </li>
                     
@@ -189,29 +126,17 @@ const Exercises: React.FC = () => {
                     </li>
                     
                     <li><strong>Step 3: UI Implementation with Guidance</strong>
-                      <br />📁 <em>Files to provide to Cody:</em>
-                      <ul>
-                        <li><code>frontend/src/components/Laptop/LaptopCard.tsx</code> - Component to modify</li>
-                        <li>Your custom <code>useFavorites</code> hook from Step 2</li>
-                      </ul>
+                      <br />📁 <code>frontend/src/components/Laptop/LaptopCard.tsx</code>, your custom <code>useFavorites</code> hook from Step 2
                       <br />💡 <strong>Step-by-Step Prompt:</strong> "Guide me through adding the heart icon step by step: 1) Import useFavorites hook, 2) Add heart icon (🤍/❤️) with absolute positioning, 3) Add click handler with event.stopPropagation(), 4) Show me the exact JSX and explain each part."
                     </li>
                     
                     <li><strong>Step 4: Styling with Best Practices</strong>
-                      <br />📁 <em>Files to provide to Cody:</em>
-                      <ul>
-                        <li><code>frontend/src/components/Laptop/LaptopCard.css</code> - Current styles</li>
-                      </ul>
+                      <br />📁 <code>frontend/src/components/Laptop/LaptopCard.css</code>
                       <br />💡 <strong>Design-Focused Prompt:</strong> "As a UI/UX designer, help me style the favorite heart: 1) Position absolutely in top-right corner, 2) Add hover effects and transitions, 3) Ensure accessibility (focus states), 4) Make it responsive. Provide complete CSS with explanations."
                     </li>
                     
                     <li><strong>Step 5: Feature Extension</strong>
-                      <br />📁 <em>Files to provide to Cody:</em>
-                      <ul>
-                        <li><code>frontend/src/pages/Laptops.tsx</code> - Pattern to follow</li>
-                        <li><code>frontend/src/App.tsx</code> - Routing to update</li>
-                        <li><code>frontend/src/components/Layout/Header.tsx</code> - Navigation to update</li>
-                      </ul>
+                      <br />📁 <code>frontend/src/pages/Laptops.tsx</code>, <code>frontend/src/App.tsx</code>, <code>frontend/src/components/Layout/Header.tsx</code>
                       <br />💡 <strong>Architecture Prompt:</strong> "Now let's create a Favorites page. Show me: 1) How to create Favorites.tsx component, 2) Filter laptops by favorites, 3) Handle empty state, 4) Add navigation link, 5) Update App.tsx routing. Follow the existing patterns in Laptops.tsx."
                     </li>
                     
@@ -251,13 +176,7 @@ const Exercises: React.FC = () => {
                   <h4>🚀 Modern Full-Stack Development Tasks:</h4>
                   <ul>
                     <li><strong>Step 1: API Analysis & Pattern Recognition</strong>
-                      <br />📁 <em>Files to provide to Cody:</em>
-                      <ul>
-                        <li><code>frontend/src/types/api.ts</code> - TypeScript interfaces</li>
-                        <li><code>frontend/src/services/api.ts</code> - API service methods</li>
-                        <li><code>frontend/src/components/Laptop/LaptopCard.tsx</code> - Component example</li>
-                        <li><code>frontend/src/pages/Laptops.tsx</code> - Page implementation</li>
-                      </ul>
+                      <br />📁 <code>frontend/src/types/api.ts</code>, <code>frontend/src/services/api.ts</code>, <code>frontend/src/components/Laptop/LaptopCard.tsx</code>, <code>frontend/src/pages/Laptops.tsx</code>
                       <br />💡 <strong>Pattern-Based Prompt:</strong> "Analyze the laptop implementation pattern. Explain: 1) TypeScript interface structure, 2) API service methods, 3) Component architecture, 4) Cart integration. Then outline the exact steps to replicate this for mice."
                     </li>
                     
@@ -266,32 +185,17 @@ const Exercises: React.FC = () => {
                     </li>
                     
                     <li><strong>Step 3: Service Layer Implementation</strong>
-                      <br />📁 <em>Files to provide to Cody:</em>
-                      <ul>
-                        <li><code>frontend/src/services/api.ts</code> - Current API service</li>
-                        <li>Your Mouse interface from Step 2</li>
-                      </ul>
+                      <br />📁 <code>frontend/src/services/api.ts</code>, your Mouse interface from Step 2
                       <br />💡 <strong>Systematic Prompt:</strong> "Following the laptop service pattern, add getMice() and getMouseById() methods. Include: 1) Proper error handling, 2) Type annotations, 3) Authentication headers, 4) Consistent naming conventions. Show before/after code."
                     </li>
                     
                     <li><strong>Step 4: Component Development</strong>
-                      <br />📁 <em>Files to provide to Cody:</em>
-                      <ul>
-                        <li><code>frontend/src/components/Laptop/LaptopCard.tsx</code> - Pattern to follow</li>
-                        <li><code>frontend/src/components/Laptop/LaptopCard.css</code> - Styling reference</li>
-                        <li>Your Mouse interface and API methods from previous steps</li>
-                      </ul>
+                      <br />📁 <code>frontend/src/components/Laptop/LaptopCard.tsx</code>, <code>frontend/src/components/Laptop/LaptopCard.css</code>, your Mouse interface and API methods from previous steps
                       <br />💡 <strong>Component Architecture Prompt:</strong> "Create MouseCard component by adapting LaptopCard. Focus on: 1) Mouse-specific specs display (DPI, connectivity, RGB), 2) Cart integration with 'mice' type, 3) Styling consistency, 4) Responsive design. Explain key differences from laptop cards."
                     </li>
                     
                     <li><strong>Step 5: Page Implementation & Routing</strong>
-                      <br />📁 <em>Files to provide to Cody:</em>
-                      <ul>
-                        <li><code>frontend/src/pages/Laptops.tsx</code> - Pattern to follow</li>
-                        <li><code>frontend/src/App.tsx</code> - Routing configuration</li>
-                        <li><code>frontend/src/components/Layout/Header.tsx</code> - Navigation to update</li>
-                        <li>Your MouseCard component from Step 4</li>
-                      </ul>
+                      <br />📁 <code>frontend/src/pages/Laptops.tsx</code>, <code>frontend/src/App.tsx</code>, <code>frontend/src/components/Layout/Header.tsx</code>, your MouseCard component from Step 4
                       <br />💡 <strong>Architecture Prompt:</strong> "Create complete Mice page following Laptops.tsx pattern: 1) State management, 2) Loading states, 3) Error handling, 4) Search/filter functionality, 5) Routing setup. Maintain architectural consistency."
                     </li>
                     
@@ -336,21 +240,12 @@ const Exercises: React.FC = () => {
                   <h4>🔧 Advanced Integration Tasks:</h4>
                   <ul>
                     <li><strong>Step 1: API Integration Analysis</strong>
-                      <br />📁 <em>Files to provide to Cody:</em>
-                      <ul>
-                        <li><code>frontend/src/pages/Orders.tsx</code> - Current order display</li>
-                        <li><code>frontend/src/services/api.ts</code> - API service layer</li>
-                        <li><code>frontend/src/contexts/AuthContext.tsx</code> - Authentication context</li>
-                      </ul>
+                      <br />📁 <code>frontend/src/pages/Orders.tsx</code>, <code>frontend/src/services/api.ts</code>, <code>frontend/src/contexts/AuthContext.tsx</code>
                       <br />💡 <strong>API Expert Prompt:</strong> "Act as an API integration specialist. Analyze the current order system and plan the cancellation feature: 1) Current order display structure, 2) Authentication requirements, 3) Error handling patterns, 4) State management approach."
                     </li>
                     
                     <li><strong>Step 2: Service Layer Implementation</strong>
-                      <br />📁 <em>Files to provide to Cody:</em>
-                      <ul>
-                        <li><code>frontend/src/services/api.ts</code> - Current API service</li>
-                        <li><code>frontend/src/types/api.ts</code> - Type definitions</li>
-                      </ul>
+                      <br />📁 <code>frontend/src/services/api.ts</code>, <code>frontend/src/types/api.ts</code>
                       <br />💡 <strong>Chain-of-Thought Prompt:</strong> "Let's build the deleteOrder service method step by step: 1) What HTTP method and endpoint? 2) What headers are needed? 3) What response format to expect? 4) How to handle different error status codes? Show the complete implementation."
                     </li>
                     
@@ -359,12 +254,7 @@ const Exercises: React.FC = () => {
                     </li>
                     
                     <li><strong>Step 4: UI/UX Implementation</strong>
-                      <br />📁 <em>Files to provide to Cody:</em>
-                      <ul>
-                        <li><code>frontend/src/pages/Orders.tsx</code> - Component to modify</li>
-                        <li>Your deleteOrder service method from Step 2</li>
-                        <li><code>frontend/src/components/Laptop/LaptopCard.tsx</code> - UI patterns reference</li>
-                      </ul>
+                      <br />📁 <code>frontend/src/pages/Orders.tsx</code>, your deleteOrder service method from Step 2, <code>frontend/src/components/Laptop/LaptopCard.tsx</code>
                       <br />💡 <strong>UX Designer Prompt:</strong> "Design the cancellation UX: 1) When to show cancel button (only pending), 2) Confirmation dialog design, 3) Loading states, 4) Success/error feedback, 5) Optimistic updates. Focus on preventing user mistakes."
                     </li>
                     
