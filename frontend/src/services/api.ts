@@ -53,12 +53,12 @@ class ApiService {
 
   // Auth methods
   async register(userData: UserCreate): Promise<User> {
-    const response = await api.post('/api/v1/users/register', userData);
+    const response = await api.post('/api/v1/auth/register', userData);
     return response.data;
   }
 
   async login(credentials: UserLogin): Promise<Token> {
-    const response = await api.post('/api/v1/users/login', credentials);
+    const response = await api.post('/api/v1/auth/login', credentials);
     return response.data;
   }
 
