@@ -6,9 +6,9 @@ A full-stack e-commerce application featuring a Java Spring Boot backend and Rea
 
 This project serves as a **practical training platform** for developers learning to work with AI coding assistants. It provides real-world scenarios and comprehensive exercises that teach:
 
-- 🤖 **AI Assistant Integration**: How to effectively use Cody for code generation, debugging, and refactoring
+- 🤖 **AI Assistant Integration**: How to effectively use modern AI coding assistants with advanced prompting techniques
 - 🔧 **Hands-on Exercises**: 5 progressive exercises covering beginner to advanced scenarios
-- 🏗️ **Production-ready Patterns**: Best practices for full-stack development with React and FastAPI
+- 🏗️ **Production-ready Patterns**: Best practices for full-stack development with React TypeScript and Spring Boot
 - 🐛 **Realistic Debugging**: Intentional bugs and challenges that mirror real development issues
 
 ## ✨ Features
@@ -32,23 +32,78 @@ This project serves as a **practical training platform** for developers learning
   - Order cancellation for pending orders
 
 ### 🎓 Learning Features
-- **📚 Built-in Exercises**: 5 comprehensive Cody training exercises
+- **📚 Built-in Exercises**: 5 comprehensive AI assistant training exercises with modern prompting techniques
 - **🐛 Intentional Bugs**: Realistic debugging scenarios for learning
-- **🎯 Progressive Difficulty**: From beginner React concepts to advanced API integration
+- **🎯 Progressive Difficulty**: From beginner React concepts to advanced Spring Boot API integration
 - **💡 Best Practices**: Code demonstrates industry-standard patterns and practices
 
 ## 🏗️ Architecture
 
+## 🚀 Java Spring Boot Backend
+
+### Architecture Overview
+This application uses a **layered architecture** following Spring Boot best practices:
+
+- **Controller Layer**: REST API endpoints handling HTTP requests
+- **Service Layer**: Business logic and data processing
+- **Repository Layer**: Data access using Spring Data JPA
+- **Entity Layer**: JPA entities representing database tables
+- **Security Layer**: JWT authentication and authorization
+
+### Key Technologies
+- **Spring Boot 3.2.0**: Main framework with auto-configuration
+- **Spring Data JPA**: Database abstraction with Hibernate
+- **Spring Security**: JWT-based authentication and authorization
+- **H2 Database**: In-memory database for development and testing
+- **Maven**: Dependency management and build tool
+- **Jackson**: JSON serialization with snake_case mapping
+
+### Configuration Highlights
+- **Port 8000**: Backend server running on http://localhost:8000
+- **CORS Enabled**: Frontend at localhost:3000 allowed
+- **JWT Security**: All order endpoints require valid Bearer tokens
+- **Mixed Product Support**: Single orders can contain both laptops and mice
+- **Automatic Stock Management**: Inventory updates on order creation/cancellation
+
 ### Backend (Java Spring Boot)
 ```
 backend/
-├── main.py              # FastAPI application with all endpoints
-├── models.py            # Pydantic models for validation
-├── services.py          # Business logic services
-├── database.py          # Database management and sample data
-├── auth.py              # JWT authentication utilities
-├── config.py            # Application configuration
-└── test_main.py         # Comprehensive test suite
+├── pom.xml                                          # Maven dependencies and configuration
+├── src/main/java/com/example/laptopstore/
+│   ├── LaptopStoreApplication.java                 # Spring Boot main application
+│   ├── controller/                                 # REST API controllers
+│   │   ├── AuthController.java                     # Authentication endpoints
+│   │   ├── LaptopController.java                   # Laptop CRUD operations
+│   │   ├── MouseController.java                    # Mouse CRUD operations
+│   │   └── OrderController.java                    # Order management
+│   ├── entity/                                     # JPA entity classes
+│   │   ├── User.java                               # User entity with authentication
+│   │   ├── Laptop.java                             # Laptop product entity
+│   │   ├── Mouse.java                              # Mouse product entity
+│   │   ├── Order.java                              # Order entity with relationships
+│   │   └── OrderItem.java                          # Order items (mixed products)
+│   ├── repository/                                 # Spring Data JPA repositories
+│   │   ├── UserRepository.java                     # User data access
+│   │   ├── LaptopRepository.java                   # Laptop data access
+│   │   ├── MouseRepository.java                    # Mouse data access
+│   │   └── OrderRepository.java                    # Order data access
+│   ├── service/                                    # Business logic services
+│   │   ├── AuthService.java                        # Authentication service
+│   │   ├── LaptopService.java                      # Laptop business logic
+│   │   ├── MouseService.java                       # Mouse business logic
+│   │   └── OrderService.java                       # Order business logic
+│   ├── security/                                   # Spring Security configuration
+│   │   ├── JwtAuthenticationFilter.java            # JWT filter for requests
+│   │   ├── JwtUtil.java                            # JWT token utilities
+│   │   └── SecurityConfig.java                     # Security configuration
+│   └── dto/                                        # Data Transfer Objects
+│       ├── LoginRequest.java                       # Login request DTO
+│       ├── RegisterRequest.java                    # Registration request DTO
+│       └── OrderRequest.java                       # Order creation DTO
+├── src/main/resources/
+│   ├── application.properties                      # Spring Boot configuration
+│   └── data.sql                                    # Sample data initialization
+└── target/                                         # Maven build output
 ```
 
 ### Frontend (React TypeScript)
@@ -81,22 +136,19 @@ frontend/
 ## 🚀 Quick Start
 
 ### Prerequisites
-- **Python 3.8+** with pip
+- **Java 17+** with Maven
 - **Node.js 16+** with npm
 - **Git** for version control
 
 ### 1. Clone and Setup Backend
 ```bash
 # Clone the repository
-git clone <repository-url>
-cd laptop-store
+git clone https://github.com/mshnjffr/e_commerce_store.git
+cd e_commerce_store
 
-# Setup backend
+# Setup and run Java Spring Boot backend
 cd backend
-pip install -r requirements.txt
-
-# Run backend server
-python main.py
+mvn spring-boot:run
 ```
 Backend will be available at `http://localhost:8000`
 
@@ -114,20 +166,20 @@ Frontend will be available at `http://localhost:3000`
 ### 3. Access the Application
 - **Main App**: http://localhost:3000
 - **Exercises**: http://localhost:3000/exercises
-- **API Docs**: http://localhost:8000/docs
 - **Backend Health**: http://localhost:8000
+- **H2 Database Console**: http://localhost:8000/h2-console (JDBC URL: `jdbc:h2:mem:testdb`)
 
 ## 🎓 AI Assistant Training Exercises
 
 Navigate to `/exercises` to access 5 comprehensive training exercises:
 
 ### 1. 🔍 **Understanding the Codebase** (Beginner)
-Learn to explore and understand application architecture using Cody
-- Frontend React application structure
-- FastAPI backend components
-- Authentication flow analysis
+Learn to explore and understand application architecture using modern AI prompting
+- Frontend React TypeScript application structure
+- Java Spring Boot backend layered architecture
+- JWT authentication flow analysis
 - Shopping cart implementation
-- Database schema exploration
+- H2 database schema and JPA entities
 
 ### 2. 🐛 **Critical Bug Fix: Login Error Crash**
 Debug and fix a realistic TypeScript runtime error
@@ -159,7 +211,7 @@ Implement order cancellation using existing DELETE endpoint
 - Error handling and loading states
 - Conditional rendering based on order status
 
-## 📊 Database Schema
+## 📊 Database Schema (H2 In-Memory)
 
 ### Products
 - **Laptops**: 10 latest models (2024-2025) from major brands
@@ -167,12 +219,18 @@ Implement order cancellation using existing DELETE endpoint
 - **Mice**: 12 modern gaming and productivity mice
   - Logitech MX Master 3S, Razer DeathAdder V3, SteelSeries Rival, etc.
 
-### Core Tables
-- **users**: Authentication and user management
-- **laptops**: Laptop product catalog
-- **mice**: Computer mice product catalog  
-- **orders**: Order tracking and management
-- **order_items**: Mixed product order items (laptops + mice)
+### JPA Entity Relationships
+- **User**: Authentication and user management with BCrypt password hashing
+- **Laptop**: Laptop product catalog with stock management
+- **Mouse**: Computer mice product catalog with gaming/productivity specs
+- **Order**: Order tracking with user relationships and mixed product support
+- **OrderItem**: Mixed product order items (laptops + mice) with quantity and pricing
+
+### Key Features
+- **H2 In-Memory Database**: Fast startup with pre-loaded sample data
+- **JPA Relationships**: Proper foreign key constraints and cascading
+- **JSON Serialization**: snake_case JSON output for frontend compatibility
+- **Stock Management**: Automatic inventory updates on order creation/cancellation
 
 ## 🔗 API Endpoints
 
@@ -183,14 +241,14 @@ GET /api/v1/laptops            # All laptops
 GET /api/v1/laptops/{id}       # Laptop details
 GET /api/v1/mice               # All mice
 GET /api/v1/mice/{id}          # Mouse details
-POST /api/v1/users/register    # User registration
-POST /api/v1/users/login       # User login
+POST /api/v1/auth/register     # User registration
+POST /api/v1/auth/login        # User login
 ```
 
-### Protected Endpoints (Requires JWT)
+### Protected Endpoints (Requires JWT Bearer Token)
 ```
 GET /api/v1/orders             # User's orders
-POST /api/v1/orders            # Create order
+POST /api/v1/orders            # Create order (mixed laptop/mice items)
 GET /api/v1/orders/{id}        # Order details
 PUT /api/v1/orders/{id}        # Update order
 DELETE /api/v1/orders/{id}     # Cancel order (pending only)
@@ -201,18 +259,18 @@ DELETE /api/v1/orders/{id}     # Cancel order (pending only)
 ### Backend Testing
 ```bash
 cd backend
-pytest                    # Run all tests
-pytest --cov=.           # Run with coverage
-pytest -v               # Verbose output
+mvn test                  # Run all tests
+mvn test -Dtest=AuthControllerTest  # Run specific test class
+mvn verify               # Run tests with integration tests
 ```
 
-**Test Coverage**:
-- ✅ Authentication endpoints
-- ✅ Product endpoints (laptops & mice)
-- ✅ Order management (create, read, update, delete)
-- ✅ Mixed product order functionality
-- ✅ Error handling and validation
-- ✅ JWT token authentication
+**Test Coverage** (To be implemented):
+- 🔲 Authentication endpoints
+- 🔲 Product endpoints (laptops & mice)
+- 🔲 Order management (create, read, update, delete)
+- 🔲 Mixed product order functionality
+- 🔲 Error handling and validation
+- 🔲 JWT token authentication
 
 ### Frontend Testing
 ```bash
@@ -260,7 +318,7 @@ By completing this exercise, you'll learn to:
 - ✅ `frontend/src/components/Laptop/LaptopCard.tsx` - Main component
 - ✅ `frontend/src/components/Layout/Header.tsx` - Navigation
 - ✅ `frontend/src/App.tsx` - Routing configuration
-- ✅ Java Spring Boot backend running on port 8080
+- ✅ Java Spring Boot backend running on port 8000
 
 ### 🤖 **Modern AI Prompting Techniques**
 
