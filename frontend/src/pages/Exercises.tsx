@@ -6,7 +6,8 @@ const Exercises: React.FC = () => {
     <div className="exercises-page">
       <div className="container">
         <div className="page-header">
-          <h1>Cody Exercises</h1>
+          <h1>Cody Exercises - Updated for Java Spring Boot</h1>
+          <p>Modern AI-assisted development exercises using advanced prompting techniques</p>
         </div>
 
         <div className="exercises-content">
@@ -16,73 +17,84 @@ const Exercises: React.FC = () => {
             <div className="exercise-item">
               <div className="exercise-number">1</div>
               <div className="exercise-content">
-                <h3>Understanding the Codebase with Cody</h3>
+                <h3>Understanding the Codebase with Advanced Prompting</h3>
                 <p className="exercise-description">
-                  Use Cody to explore and understand this laptop store application.
+                  Master codebase comprehension using modern prompting techniques including chain-of-thought reasoning, role-based prompting, and metacognitive analysis.
                 </p>
                 <div className="exercise-tasks">
-                  <h4>Tasks to complete:</h4>
+                  <h4>🧠 Modern Prompting Techniques to Learn:</h4>
+                  <p>✅ Chain-of-Thought • Role-Based Prompting • Few-Shot Examples • Self-Consistency • Metacognitive Reasoning</p>
+                  
+                  <h4>Tasks to complete with Advanced Prompts:</h4>
                   <ul>
-                    <li>Ask Cody to explain the overall architecture of the frontend React application</li>
-                    <li>Use Cody to understand the FastAPI backend structure and main components</li>
-                    <li>Query Cody about the authentication flow between frontend and backend</li>
-                    <li>Ask Cody to explain the shopping cart implementation and state management</li>
-                    <li>Use Cody to understand the database schema and relationships</li>
+                    <li><strong>Step 1: Frontend Architecture Analysis</strong>
+                      <br />📁 <em>Context to provide:</em> <code>frontend/src/</code> directory structure
+                      <br />💡 <strong>Chain-of-Thought Prompt:</strong> "Walk me through the React frontend architecture step by step. First, explain the overall folder structure in `/frontend/src`, then describe how routing works, followed by component organization, and finally explain the state management approach used for the shopping cart."
+                    </li>
+                    
+                    <li><strong>Step 2: Java Spring Boot Backend Analysis</strong>
+                      <br />📁 <em>Context to provide:</em> <code>backend/src/main/java/com/example/laptopstore/</code>
+                      <br />💡 <strong>Role-Based Prompt:</strong> "Act as a Java Spring Boot expert. Analyze this backend structure. Explain: 1) The layered architecture pattern (Controller → Service → Repository), 2) How JPA entities are structured, 3) Spring Security configuration for JWT authentication, 4) Maven dependencies and their purposes."
+                    </li>
+                    
+                    <li><strong>Step 3: Authentication Flow Deep Dive</strong>
+                      <br />📁 <em>Context to provide:</em> <code>src/security/</code>, <code>src/services/api.ts</code>
+                      <br />💡 <strong>Few-Shot Prompting:</strong> "Help me understand the authentication flow by showing examples. First, trace what happens when a user logs in: Frontend: Login form → API call, Backend: JWT generation, Frontend: Token storage. Then show how protected routes work when accessing `/api/v1/orders`."
+                    </li>
+                    
+                    <li><strong>Step 4: Shopping Cart Implementation</strong>
+                      <br />📁 <em>Context to provide:</em> <code>src/contexts/CartContext.tsx</code>, <code>src/pages/Cart.tsx</code>
+                      <br />💡 <strong>Self-Consistency Prompt:</strong> "Explain the shopping cart from three perspectives: 1) User Experience: How does adding/removing work from UI? 2) State Management: How is cart state managed (Context, localStorage)? 3) Data Flow: How does cart data flow to backend during checkout?"
+                    </li>
+                    
+                    <li><strong>Step 5: Database Schema & Relationships</strong>
+                      <br />📁 <em>Context to provide:</em> <code>backend/src/main/java/com/example/laptopstore/entity/</code>
+                      <br />💡 <strong>Metacognitive Prompting:</strong> "I want to understand the database design. First, explain your reasoning process: How would you approach analyzing this schema? Then walk through: H2 configuration, JPA entity relationships (User, Laptop, Order, OrderItem), foreign key connections, and design decisions."
+                    </li>
                   </ul>
                 </div>
-                <div className="difficulty-level junior"> Ask Questions? </div>
+                <div className="difficulty-level junior">🎓 Advanced Analysis</div>
               </div>
             </div>
 
             <div className="exercise-item">
               <div className="exercise-number">2</div>
               <div className="exercise-content">
-                <h3>Critical Bug Fix: App Crash on Login Error</h3>
+                <h3>Critical Bug Fix: Login Error Crash with AI Debugging</h3>
                 <p className="exercise-description">
-                  Learn to debug and fix critical runtime errors that crash the application when users enter incorrect login credentials.
+                  Master AI-assisted debugging using chain-of-thought reasoning to fix a critical TypeScript runtime error in the login system.
                 </p>
                 <div className="exercise-tasks">
                   <h4>🚨 Critical Issue to Solve:</h4>
-                  <p>💥 The application crashes with a TypeScript error when users enter wrong login credentials. Users see a compilation error overlay instead of a proper error message. This breaks the entire user experience.</p>
+                  <p>💥 The application crashes with TypeScript error when users enter wrong login credentials. Users see a compilation error overlay instead of proper error message.</p>
                   
                   <h4>Current Error:</h4>
                   <div className="error-message">
                     <code>TS2339: Property 'message' does not exist on type 'string | &#123; message: string; timestamp: number &#125;'</code>
                   </div>
                   
-                  <h4>Tasks to complete with Cody:</h4>
+                  <h4>🧠 AI-Assisted Debugging Tasks:</h4>
                   <ul>
-                    <li><strong>Step 1: Identify the TypeScript error</strong>
-                    <br />📁 <em>Context to provide:</em> <code>src/pages/Login.tsx</code>
-                    <br />💡 <strong>Ask Cody:</strong> "I'm getting a TypeScript error 'Property message does not exist on type string'. The error is on line 118 where I try to access errors.general.message.toUpperCase(). Can you explain why this fails and how to fix it?"
+                    <li><strong>Step 1: Root Cause Analysis</strong>
+                    <br />📁 <em>Context:</em> <code>src/pages/Login.tsx</code> lines 119, 25, 68, 74
+                    <br />💡 <strong>Chain-of-Thought Prompt:</strong> "Act as a TypeScript debugging expert. Let's trace this error step by step: 1) What is the exact error on line 119? 2) What type does `errors.general` have? 3) Why does `.message.toUpperCase()` fail? 4) What are the possible values of `errors.general`?"
                     </li>
                     
-                    <li><strong>Step 2: Understand the error data types</strong>
-                    <br />📁 <em>Context to provide:</em> <code>src/pages/Login.tsx</code>
-                    <br />💡 <strong>Ask Cody:</strong> "I see errors.general can be either a string or an object with &#123;message: string, timestamp: number&#125;. How should I safely access the message property without causing crashes?"
+                    <li><strong>Step 2: Type System Understanding</strong>
+                    <br />📁 <em>Context:</em> <code>src/contexts/AuthContext.tsx</code> lines 45-50
+                    <br />💡 <strong>Self-Consistency Prompt:</strong> "Explain the type mismatch from three angles: 1) Backend perspective: What does `/api/v1/auth/login` return? 2) AuthContext perspective: How are errors processed? 3) Component perspective: What type does Login.tsx expect?"
                     </li>
                     
-                    <li><strong>Step 3: Fix the error display logic</strong>
-                    <br />📁 <em>Context to provide:</em> <code>src/pages/Login.tsx</code>
-                    <br />💡 <strong>Ask Cody:</strong> "Help me create a safe way to display error messages that works for both string and object error types. Use type guards or conditional logic."
+                    <li><strong>Step 3: Defensive Programming Solution</strong>
+                    <br />💡 <strong>Role-Based Prompt:</strong> "As a senior React developer, show me three different ways to safely handle this error type: 1) Type guards approach, 2) Helper function approach, 3) Simplified error handling approach. Explain pros/cons of each."
                     </li>
                     
-                    <li><strong>Step 4: Simplify the error handling</strong>
-                    <br />📁 <em>Context to provide:</em> <code>src/pages/Login.tsx</code>
-                    <br />💡 <strong>Ask Cody:</strong> "The current error handling is too complex. Help me refactor it to consistently use string error messages throughout the component."
+                    <li><strong>Step 4: Implementation Strategy</strong>
+                    <br />💡 <strong>Few-Shot Prompting:</strong> "Show me before/after code examples for fixing this. Before: `errors.general.message.toUpperCase()` (crashes). After: Safe version that handles both string and object types."
                     </li>
                     
-                    <li><strong>Step 5: Test the fix</strong>
-                    <br />💡 <strong>Ask Cody:</strong> "After fixing the error display, what should I test to ensure login error handling works correctly? Give me specific test cases."
-                    </li>
-                    
-                    <li><strong>Step 6: Add defensive programming</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/pages/Login.tsx</code>
-                    <br />💡 <strong>Ask Cody:</strong> "Help me add defensive programming techniques to prevent similar crashes in the future. What utility functions or patterns should I use?"
-                    </li>
-                    
-                    <li><strong>Step 7: Enhance error UX</strong>
-                    <br />💡 <strong>Ask Cody:</strong> "Now that errors display safely, help me improve the user experience with better error messages, auto-clearing on input, and loading states."
+                    <li><strong>Step 5: Comprehensive Testing</strong>
+                    <br />💡 <strong>Systematic Prompt:</strong> "Create a testing checklist for this fix: 1) Test invalid credentials, 2) Test network errors, 3) Test valid login, 4) Test edge cases. What specific scenarios should I verify?"
                     </li>
                   </ul>
                   
@@ -94,236 +106,214 @@ const Exercises: React.FC = () => {
             <div className="exercise-item">
               <div className="exercise-number">3</div>
               <div className="exercise-content">
-                <h3>Simple Feature: Add Product Favorites</h3>
+                <h3>Feature Development: Product Favorites with Modern Prompting</h3>
                 <p className="exercise-description">
-                  Learn React basics by adding a heart icon that toggles favorite status for laptops. Perfect for beginners to understand state, events, and localStorage.
+                  Learn React development using AI mentorship with step-by-step guidance, role-based prompting, and comprehensive feature implementation.
                 </p>
                 <div className="exercise-tasks">
-                  <h4>What you'll learn:</h4>
-                  <p>✅ React useState hook • Event handlers • Conditional rendering • localStorage • Basic CSS</p>
+                  <h4>🎯 Modern Prompting Techniques:</h4>
+                  <p>✅ Step-by-Step Mentoring • Role-Based Learning • Pattern Recognition • Progressive Enhancement</p>
                   
-                  <h4>Tasks to complete with Cody:</h4>
+                  <h4>Tasks with AI Mentorship:</h4>
                   <ul>
-                    <li><strong>Step 1: Understand the laptop cards</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/components/Laptop/LaptopCard.tsx</code>
-                      <br />💡 <strong>Ask Cody:</strong> "Explain how this LaptopCard component works. I want to add a favorite heart icon that users can click to save favorite laptops."
+                    <li><strong>Step 1: Component Analysis & Planning</strong>
+                      <br />📁 <em>Context:</em> <code>src/components/Laptop/LaptopCard.tsx</code>
+                      <br />💡 <strong>Mentor Prompt:</strong> "Act as a React mentor for beginners. Analyze this LaptopCard component and explain: 1) Current structure and props, 2) Where I should add a favorite heart icon, 3) What React concepts I'll need (useState, event handlers, conditional rendering), 4) How localStorage integration works."
                     </li>
                     
-                    <li><strong>Step 2: Create a custom hook for favorites</strong>
-                      <br />💡 <strong>Ask Cody:</strong> "Create a simple custom hook called useFavorites() that manages favorite laptop IDs in localStorage. It should return an array of favorite IDs, and functions to addFavorite(id) and removeFavorite(id)."
+                    <li><strong>Step 2: Custom Hook Development</strong>
+                      <br />💡 <strong>Pattern-Based Prompt:</strong> "Show me how to create a `useFavorites()` custom hook following React best practices. Include: 1) useState for favorites array, 2) useEffect for localStorage sync, 3) addFavorite and removeFavorite functions, 4) isFavorite checker function. Explain each part."
                     </li>
                     
-                    <li><strong>Step 3: Add heart icon to laptop cards</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/components/Laptop/LaptopCard.tsx</code>
-                      <br />💡 <strong>Ask Cody:</strong> "Add a heart icon (🤍 for not favorite, ❤️ for favorite) to the top-right corner of each laptop card. Use the useFavorites hook to check if this laptop is favorited and toggle it when clicked."
+                    <li><strong>Step 3: UI Implementation with Guidance</strong>
+                      <br />📁 <em>Context:</em> <code>src/components/Laptop/LaptopCard.tsx</code>
+                      <br />💡 <strong>Step-by-Step Prompt:</strong> "Guide me through adding the heart icon step by step: 1) Import useFavorites hook, 2) Add heart icon (🤍/❤️) with absolute positioning, 3) Add click handler with event.stopPropagation(), 4) Show me the exact JSX and explain each part."
                     </li>
                     
-                    <li><strong>Step 4: Add click handler</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/components/Laptop/LaptopCard.tsx</code>
-                      <br />💡 <strong>Ask Cody:</strong> "Add a handleFavoriteClick function that toggles the favorite status. If the laptop is already favorited, remove it. If not, add it to favorites."
+                    <li><strong>Step 4: Styling with Best Practices</strong>
+                      <br />📁 <em>Context:</em> <code>src/components/Laptop/LaptopCard.css</code>
+                      <br />💡 <strong>Design-Focused Prompt:</strong> "As a UI/UX designer, help me style the favorite heart: 1) Position absolutely in top-right corner, 2) Add hover effects and transitions, 3) Ensure accessibility (focus states), 4) Make it responsive. Provide complete CSS with explanations."
                     </li>
                     
-                    <li><strong>Step 5: Style the heart icon</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/components/Laptop/LaptopCard.css</code>
-                      <br />💡 <strong>Ask Cody:</strong> "Add CSS for the favorite heart icon. Position it absolutely in the top-right corner with some padding. Make it clickable with hover effects and transition animations."
+                    <li><strong>Step 5: Feature Extension</strong>
+                      <br />💡 <strong>Architecture Prompt:</strong> "Now let's create a Favorites page. Show me: 1) How to create Favorites.tsx component, 2) Filter laptops by favorites, 3) Handle empty state, 4) Add navigation link, 5) Update App.tsx routing. Follow the existing patterns in Laptops.tsx."
                     </li>
                     
-                    <li><strong>Step 6: Create a favorites page</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/pages/Laptops.tsx</code>
-                      <br />💡 <strong>Ask Cody:</strong> "Create a Favorites.tsx page that shows only favorited laptops. Filter the laptops to show only ones whose IDs are in the favorites list from useFavorites hook."
-                    </li>
-                    
-                    <li><strong>Step 7: Add navigation to favorites</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/components/Layout/Header.tsx</code>, <code>src/App.tsx</code>
-                      <br />💡 <strong>Ask Cody:</strong> "Add a 'Favorites' link to the navigation header and add the route to App.tsx. Show a heart icon (❤️) next to 'Favorites' in the nav."
-                    </li>
-                    
-                    <li><strong>Step 8: Handle empty favorites state</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/pages/Favorites.tsx</code>
-                      <br />💡 <strong>Ask Cody:</strong> "Add an empty state when no laptops are favorited. Show a message like 'No favorites yet! Browse laptops and click the heart icon to save your favorites.' with a link to the laptops page."
-                    </li>
-                    
-                    <li><strong>Step 9: Test the feature</strong>
-                      <br />💡 <strong>Ask Cody:</strong> "What should I test to make sure the favorites feature works correctly? Give me a step-by-step testing checklist."
+                    <li><strong>Step 6: Testing & Validation</strong>
+                      <br />💡 <strong>QA Prompt:</strong> "Act as a QA tester. Create a comprehensive testing plan: 1) Functional tests (add/remove favorites), 2) Edge cases (localStorage disabled, empty favorites), 3) User experience tests, 4) Cross-browser compatibility. Give me a testing checklist."
                     </li>
                   </ul>
                   
                   <div className="tips-box">
-                    <h4>💡 Beginner Tips for React Development:</h4>
+                    <h4>💡 Modern AI Learning Techniques:</h4>
                     <ul>
-                      <li><strong>Start small:</strong> Get the heart icon showing first, then add click functionality</li>
-                      <li><strong>Use console.log:</strong> Add logging to see when functions are called and what data you have</li>
-                      <li><strong>Check localStorage:</strong> Open DevTools → Application → Local Storage to see stored data</li>
-                      <li><strong>React useState:</strong> State changes trigger re-renders automatically</li>
-                      <li><strong>Conditional rendering:</strong> Use ternary operators like <code>&#123;isFavorite ? '❤️' : '🤍'&#125;</code></li>
-                      <li><strong>Event handlers:</strong> Always pass functions, not function calls: <code>onClick=&#123;handleClick&#125;</code></li>
+                      <li><strong>Role-Based Learning:</strong> Ask AI to act as mentor, designer, QA tester for different perspectives</li>
+                      <li><strong>Step-by-Step Guidance:</strong> Break complex tasks into smaller, manageable steps</li>
+                      <li><strong>Pattern Recognition:</strong> Learn by following existing patterns in the codebase</li>
+                      <li><strong>Progressive Enhancement:</strong> Start with basic functionality, then enhance</li>
+                      <li><strong>Validation Loops:</strong> Always ask "What could go wrong?" and "How do I test this?"</li>
                     </ul>
                   </div>
                   
                 </div>
-                <div className="difficulty-level junior">❤️ Beginner React</div>
+                <div className="difficulty-level junior">❤️ Feature Development</div>
               </div>
             </div>
-
 
             <div className="exercise-item">
               <div className="exercise-number">4</div>
               <div className="exercise-content">
-                <h3>Frontend Implementation: Adding Computer Mice</h3>
+                <h3>Full-Stack Integration: Adding Computer Mice with Modern API Patterns</h3>
                 <p className="exercise-description">
-                  Learn to use Cody for implementing new features by adding computer mice to the frontend, following the existing laptop patterns.
+                  Master full-stack development using pattern-based learning and systematic API integration with our Java Spring Boot backend.
                 </p>
                 <div className="exercise-tasks">
-                  <h4>Before you start - Backend is ready!</h4>
-                  <p>✅ The backend already has mice endpoints: <code>GET /api/v1/mice</code> and <code>GET /api/v1/mice/&#123;id&#125;</code></p>
+                  <h4>✅ Backend Verified - Ready to Use!</h4>
+                  <p><strong>Available Endpoints:</strong> <code>GET /api/v1/mice</code> • <code>GET /api/v1/mice/&#123;id&#125;</code> (Port 8000)</p>
+                  <p><strong>Sample Data:</strong> 12 mice with realistic gaming/productivity specifications</p>
                   
-                  <h4>Tasks to complete with Cody:</h4>
+                  <h4>🚀 Modern Full-Stack Development Tasks:</h4>
                   <ul>
-                    <li><strong>Step 1: Understand the laptop implementation</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/types/api.ts</code>, <code>src/services/api.ts</code>, <code>src/components/LaptopCard.tsx</code>
-                      <br />💡 <strong>Ask Cody:</strong> "Explain how laptops are implemented in this React app - from API types to components. I want to add mice following the same pattern."
+                    <li><strong>Step 1: API Analysis & Pattern Recognition</strong>
+                      <br />📁 <em>Context:</em> <code>src/types/api.ts</code>, <code>src/services/api.ts</code>
+                      <br />💡 <strong>Pattern-Based Prompt:</strong> "Analyze the laptop implementation pattern. Explain: 1) TypeScript interface structure, 2) API service methods, 3) Component architecture, 4) Cart integration. Then outline the exact steps to replicate this for mice."
                     </li>
                     
-                    <li><strong>Step 2: Create mouse TypeScript types</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/types/api.ts</code>
-                      <br />💡 <strong>Ask Cody:</strong> "Add mouse types to this file. Mice have: id, brand, model, mouse_type, connectivity, dpi, buttons, rgb_lighting, weight_grams, price, stock_quantity, created_at"
+                    <li><strong>Step 2: Type-Safe API Integration</strong>
+                      <br />💡 <strong>TypeScript Expert Prompt:</strong> "Act as a TypeScript expert. Create the Mouse interface with these fields: id, brand, model, mouse_type, connectivity, dpi, buttons, rgb_lighting, weight_grams, price, stock_quantity, created_at. Explain each field's purpose and type reasoning."
                     </li>
                     
-                    <li><strong>Step 3: Add mouse API service methods</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/services/api.ts</code>
-                      <br />💡 <strong>Ask Cody:</strong> "Add getMice() and getMouseById() methods following the same pattern as laptops. The endpoints are /api/v1/mice and /api/v1/mice/&#123;id&#125;"
+                    <li><strong>Step 3: Service Layer Implementation</strong>
+                      <br />📁 <em>Context:</em> <code>src/services/api.ts</code>
+                      <br />💡 <strong>Systematic Prompt:</strong> "Following the laptop service pattern, add getMice() and getMouseById() methods. Include: 1) Proper error handling, 2) Type annotations, 3) Authentication headers, 4) Consistent naming conventions. Show before/after code."
                     </li>
                     
-                    <li><strong>Step 4: Create MouseCard component</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/components/Laptop/LaptopCard.tsx</code>
-                      <br />💡 <strong>Ask Cody:</strong> "Create a MouseCard component based on this LaptopCard. Show brand, model, mouse_type, connectivity, DPI, buttons, RGB status, weight, price, and stock. Copy the 'Add to Cart' functionality but change the addToCart call to use mice type."
-                      <br />🔧 <strong>Key Change:</strong> Use <code>addToCart(mouse, 'mice', 1)</code> instead of <code>addToCart(laptop, 'laptop', 1)</code>
+                    <li><strong>Step 4: Component Development</strong>
+                      <br />📁 <em>Context:</em> <code>src/components/Laptop/LaptopCard.tsx</code>
+                      <br />💡 <strong>Component Architecture Prompt:</strong> "Create MouseCard component by adapting LaptopCard. Focus on: 1) Mouse-specific specs display (DPI, connectivity, RGB), 2) Cart integration with 'mice' type, 3) Styling consistency, 4) Responsive design. Explain key differences from laptop cards."
                     </li>
                     
-                    <li><strong>Step 5: Create Mice listing page</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/pages/Laptops.tsx</code>, <code>src/components/MouseCard.tsx</code>
-                      <br />💡 <strong>Ask Cody:</strong> "Create a Mice.tsx page based on this Laptops page structure, using MouseCard components and the mouse API service."
+                    <li><strong>Step 5: Page Implementation & Routing</strong>
+                      <br />📁 <em>Context:</em> <code>src/pages/Laptops.tsx</code>, <code>src/App.tsx</code>
+                      <br />💡 <strong>Architecture Prompt:</strong> "Create complete Mice page following Laptops.tsx pattern: 1) State management, 2) Loading states, 3) Error handling, 4) Search/filter functionality, 5) Routing setup. Maintain architectural consistency."
                     </li>
                     
-                    <li><strong>Step 6: Add navigation and routing</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/components/Layout/Header.tsx</code>, <code>src/App.tsx</code>
-                      <br />💡 <strong>Ask Cody:</strong> "Add 'Mice' navigation link and route. Add it after 'Laptops' in both the header and routing."
+                    <li><strong>Step 6: Mixed Cart Testing</strong>
+                      <br />💡 <strong>Integration Testing Prompt:</strong> "Our backend supports mixed laptop+mice orders! Create a comprehensive test plan: 1) Add both products to cart, 2) Test quantity updates, 3) Verify checkout process, 4) Test order completion. What scenarios should I validate?"
                     </li>
                     
-                    <li><strong>Step 7: Test full cart functionality</strong>
-                      <br />💡 <strong>Excellent news:</strong> The complete system now supports both laptops and mice! Test the full workflow from adding to cart through checkout.
-                      <br />✅ <strong>What works:</strong> Adding mice to cart, viewing mixed cart items, quantity updates, removing items, and full checkout with mixed orders!
-                      <br />🎉 <strong>Backend Updated:</strong> The order system has been enhanced to support both product types seamlessly.
-                    </li>
-                    
-                    <li><strong>Step 8: Test and troubleshoot</strong>
-                      <br />💡 <strong>Ask Cody:</strong> "Help me debug any TypeScript errors or runtime issues. What common mistakes should I watch for when adding new features like this?"
+                    <li><strong>Step 7: Advanced Features</strong>
+                      <br />💡 <strong>Enhancement Prompt:</strong> "Add mice-specific features: 1) Filter by mouse type (gaming/productivity), 2) Sort by DPI, 3) Filter by connectivity, 4) RGB lighting indicator. Follow existing laptop filtering patterns and maintain UI consistency."
                     </li>
                   </ul>
                   
-                  <div className="tips-box">
-                    <h4>💡 Pro Tips for Working with Cody:</h4>
-                    <ul>
-                      <li><strong>Always provide context:</strong> Include the files you're working with or want to follow as examples</li>
-                      <li><strong>Be specific:</strong> Instead of "add mice" say "create MouseCard component based on LaptopCard"</li>
-                      <li><strong>Ask for explanations:</strong> "Explain why this pattern works" helps you learn</li>
-                      <li><strong>Follow up:</strong> Ask "What could go wrong?" or "What should I test?"</li>
-                      <li><strong>Copy existing patterns:</strong> It's faster and more consistent than creating from scratch</li>
-                      <li><strong>Test incrementally:</strong> Get each step working before moving to the next</li>
-                      <li><strong>Watch for type mismatches:</strong> When copying code, TypeScript functions expecting specific types (like Laptop) won't work with different types (like Mouse)</li>
-                    </ul>
+                  <div className="api-reference">
+                    <h4>📚 Backend API Reference:</h4>
+                    <div className="api-endpoint">
+                      <strong>GET /api/v1/mice</strong>
+                      <ul>
+                        <li><strong>Response:</strong> Array of Mouse objects</li>
+                        <li><strong>Fields:</strong> snake_case JSON (mouse_type, rgb_lighting, etc.)</li>
+                        <li><strong>Sample:</strong> 12 realistic mice with gaming/productivity specs</li>
+                      </ul>
+                    </div>
                   </div>
                   
                 </div>
-                <div className="difficulty-level intermediate">🧑‍💻 Code Generation</div>
+                <div className="difficulty-level intermediate">🖱️ Full-Stack Integration</div>
               </div>
             </div>
 
             <div className="exercise-item">
               <div className="exercise-number">5</div>
               <div className="exercise-content">
-                <h3>API Integration: Adding Order Cancellation</h3>
+                <h3>Advanced API Integration: Order Cancellation with Error Handling</h3>
                 <p className="exercise-description">
-                  Learn to integrate with existing backend APIs by adding order cancellation functionality using the DELETE order endpoint.
+                  Master complex API integration using systematic debugging, comprehensive error handling, and user experience optimization.
                 </p>
                 <div className="exercise-tasks">
-                  <h4>Backend API Available:</h4>
-                  <p>✅ <code>DELETE /api/v1/orders/&#123;order_id&#125;</code> - Cancels pending orders only</p>
+                  <h4>✅ Backend API Verified & Ready!</h4>
+                  <p><strong>Endpoint:</strong> <code>DELETE /api/v1/orders/&#123;orderId&#125;</code></p>
+                  <p><strong>Features:</strong> JWT auth required • Only PENDING orders • Inventory restoration</p>
                   
-                  <h4>Tasks to complete with Cody:</h4>
+                  <h4>🔧 Advanced Integration Tasks:</h4>
                   <ul>
-                    <li><strong>Step 1: Understand the existing order system</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/pages/Orders.tsx</code>, <code>src/services/api.ts</code>
-                      <br />💡 <strong>Ask Cody:</strong> "Explain how orders are displayed and managed in this app. I want to add a cancel order button for pending orders."
+                    <li><strong>Step 1: API Integration Analysis</strong>
+                      <br />📁 <em>Context:</em> <code>src/pages/Orders.tsx</code>, <code>src/services/api.ts</code>
+                      <br />💡 <strong>API Expert Prompt:</strong> "Act as an API integration specialist. Analyze the current order system and plan the cancellation feature: 1) Current order display structure, 2) Authentication requirements, 3) Error handling patterns, 4) State management approach."
                     </li>
                     
-                    <li><strong>Step 2: Add deleteOrder to API service</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/services/api.ts</code>
-                      <br />💡 <strong>Ask Cody:</strong> "Add a deleteOrder method to this API service. It should send DELETE request to /api/v1/orders/&#123;id&#125; and handle authentication headers like other methods."
+                    <li><strong>Step 2: Service Layer Implementation</strong>
+                      <br />📁 <em>Context:</em> <code>src/services/api.ts</code>
+                      <br />💡 <strong>Chain-of-Thought Prompt:</strong> "Let's build the deleteOrder service method step by step: 1) What HTTP method and endpoint? 2) What headers are needed? 3) What response format to expect? 4) How to handle different error status codes? Show the complete implementation."
                     </li>
                     
-                    <li><strong>Step 3: Add cancel functionality to Orders page</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/pages/Orders.tsx</code>, <code>src/services/api.ts</code>
-                      <br />💡 <strong>Ask Cody:</strong> "Add a 'Cancel Order' button to pending orders. Include a confirmation dialog asking 'Are you sure you want to cancel this order?' before calling the deleteOrder API."
+                    <li><strong>Step 3: Comprehensive Error Handling</strong>
+                      <br />💡 <strong>Error Handling Expert Prompt:</strong> "Design error handling for all scenarios: 1) 200: Success, 2) 401: Unauthorized, 3) 404: Order not found, 4) 400: Cannot cancel (not pending), 5) Network errors. Create user-friendly error messages for each case."
                     </li>
                     
-                    <li><strong>Step 4: Implement confirmation dialog</strong>
-                      <br />📁 <em>Context to provide:</em> <code>src/pages/Cart.tsx</code> (for modal example)
-                      <br />💡 <strong>Ask Cody:</strong> "Create a confirmation modal similar to the cart clear confirmation. Show order details and ask for confirmation before cancelling."
+                    <li><strong>Step 4: UI/UX Implementation</strong>
+                      <br />📁 <em>Context:</em> <code>src/pages/Orders.tsx</code>
+                      <br />💡 <strong>UX Designer Prompt:</strong> "Design the cancellation UX: 1) When to show cancel button (only pending), 2) Confirmation dialog design, 3) Loading states, 4) Success/error feedback, 5) Optimistic updates. Focus on preventing user mistakes."
                     </li>
                     
-                    <li><strong>Step 5: Handle API responses and errors</strong>
-                      <br />💡 <strong>Ask Cody:</strong> "Add proper error handling for the cancel order functionality. Show success/error messages and refresh the orders list after successful cancellation."
+                    <li><strong>Step 5: Testing & Validation</strong>
+                      <br />💡 <strong>QA Testing Prompt:</strong> "Create comprehensive test scenarios: 1) Happy path (cancel pending order), 2) Error cases (cancel shipped order), 3) Network failures, 4) Concurrent operations, 5) UI state consistency. Include manual testing steps."
                     </li>
                     
-                    <li><strong>Step 6: Add loading states</strong>
-                      <br />💡 <strong>Ask Cody:</strong> "Add loading states to prevent multiple clicks on cancel button and show 'Cancelling...' text during API call."
+                    <li><strong>Step 6: Advanced Features</strong>
+                      <br />💡 <strong>Enhancement Prompt:</strong> "Add advanced features: 1) Bulk cancellation, 2) Cancellation reasons, 3) Undo functionality (time-limited), 4) Real-time order status updates. Maintain backward compatibility."
                     </li>
-                    
-                    <li><strong>Step 7: Conditional rendering</strong>
-                      <br />💡 <strong>Ask Cody:</strong> "Only show cancel button for orders with 'pending' status. Hide it for completed, cancelled, or shipped orders."
-                    </li>
-                  </ul>      
+                  </ul>
                   
                   <div className="api-reference">
-                    <h4>📚 API Reference:</h4>
+                    <h4>📚 Verified API Specification:</h4>
                     <div className="api-endpoint">
-                      <strong>DELETE /api/v1/orders/&#123;order_id&#125;</strong>
+                      <strong>DELETE /api/v1/orders/&#123;orderId&#125;</strong>
                       <ul>
-                        <li><strong>Auth:</strong> Required (JWT token)</li>
-                        <li><strong>Permissions:</strong> User can only cancel their own orders</li>
-                        <li><strong>Constraints:</strong> Only pending orders can be cancelled</li>
-                        <li><strong>Success:</strong> 200 + &#123;"message": "Order deleted successfully"&#125;</li>
-                        <li><strong>Errors:</strong> 404 (not found), 400 (cannot cancel), 401 (unauthorized)</li>
+                        <li><strong>Auth:</strong> JWT Bearer token required</li>
+                        <li><strong>Permissions:</strong> Users can only cancel own orders</li>
+                        <li><strong>Business Rule:</strong> Only PENDING status orders can be cancelled</li>
+                        <li><strong>Success Response:</strong> <code>&#123;"message": "Order deleted successfully"&#125;</code></li>
+                        <li><strong>Side Effects:</strong> Automatically restores inventory to stock</li>
+                        <li><strong>Error Codes:</strong> 401 (auth), 404 (not found), 400 (cannot cancel)</li>
                       </ul>
                     </div>
                   </div>
-                
+                  
                 </div>
-                <div className="difficulty-level intermediate">🔗 API Integration</div>
+                <div className="difficulty-level intermediate">🔗 Advanced API Integration</div>
               </div>
             </div>
 
           </div>
 
           <div className="tips-section">
-            <h2>💡 Tips for Effective AI Assistant Usage</h2>
+            <h2>🧠 Modern AI Prompting Techniques Reference</h2>
             <div className="tips-grid">
               <div className="tip-card">
-                <h4>Be Specific</h4>
-                <p>Ask detailed questions with context about what you're trying to understand or achieve.</p>
+                <h4>🔗 Chain-of-Thought</h4>
+                <p>Ask AI to explain its reasoning step-by-step: "Walk me through this step by step..."</p>
               </div>
               <div className="tip-card">
-                <h4>Iterate</h4>
-                <p>Follow up with clarifying questions to dive deeper into complex topics.</p>
+                <h4>🎭 Role-Based Prompting</h4>
+                <p>Ask AI to act as an expert: "Act as a senior React developer..." or "As a TypeScript expert..."</p>
               </div>
               <div className="tip-card">
-                <h4>Verify</h4>
-                <p>Always review and test the suggestions provided by AI assistants.</p>
+                <h4>📋 Few-Shot Learning</h4>
+                <p>Provide examples: "Show me before/after examples..." or "Give me 3 different approaches..."</p>
               </div>
               <div className="tip-card">
-                <h4>Learn</h4>
-                <p>Use AI responses as learning opportunities to understand underlying concepts.</p>
+                <h4>🔄 Self-Consistency</h4>
+                <p>Ask for multiple perspectives: "Explain this from 3 different angles..." to verify understanding</p>
+              </div>
+              <div className="tip-card">
+                <h4>🧠 Metacognitive</h4>
+                <p>Ask AI to explain its thinking: "First explain your approach, then solve the problem..."</p>
+              </div>
+              <div className="tip-card">
+                <h4>🔍 Systematic Analysis</h4>
+                <p>Break down complex problems: "Analyze this systematically: 1) Current state, 2) Desired state, 3) Steps to get there"</p>
               </div>
             </div>
           </div>

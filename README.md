@@ -1,6 +1,6 @@
 # 🛒 Laptop Store - Complete E-commerce Platform
 
-A full-stack e-commerce application featuring a FastAPI backend and React TypeScript frontend, designed specifically for teaching developers how to effectively use AI coding assistants like Cody. This comprehensive laptop store includes both laptops and computer mice, with advanced features like mixed cart functionality, order management, and authentication.
+A full-stack e-commerce application featuring a Java Spring Boot backend and React TypeScript frontend, designed specifically for teaching developers how to effectively use AI coding assistants like Cody. This comprehensive laptop store includes both laptops and computer mice, with advanced features like mixed cart functionality, order management, and authentication.
 
 ## 🎯 Project Purpose
 
@@ -39,7 +39,7 @@ This project serves as a **practical training platform** for developers learning
 
 ## 🏗️ Architecture
 
-### Backend (FastAPI)
+### Backend (Java Spring Boot)
 ```
 backend/
 ├── main.py              # FastAPI application with all endpoints
@@ -137,12 +137,12 @@ Debug and fix a realistic TypeScript runtime error
 - **Real Impact**: Breaks user experience and requires immediate fix
 
 ### 3. ❤️ **Simple Feature: Product Favorites** 
-Add heart icon toggle functionality for saving favorite laptops
-- React useState hook usage
-- Event handlers and conditional rendering
-- localStorage persistence
-- Custom hooks creation
-- Basic CSS positioning and styling
+Add heart icon toggle functionality for saving favorite laptops using modern AI-assisted development
+- React useState hook and custom hook patterns
+- Event handlers and conditional rendering with TypeScript
+- localStorage persistence with error handling
+- Component composition and reusability
+- Modern CSS positioning and interactive animations
 
 ### 4. 🖱️ **Frontend Implementation: Computer Mice** 
 Add complete computer mice functionality following laptop patterns
@@ -234,3 +234,217 @@ Username: jane_smith   | Password: securepass456
 - **12 Modern Mice**: MX Master 3S, DeathAdder V3, Rival 650, etc.
 - **Realistic Pricing**: Market-accurate prices and specifications
 - **Stock Management**: Varied stock quantities for testing
+
+---
+
+## 📚 **Exercise 3: Product Favorites Feature - Modern AI-Assisted Development**
+
+### 🎯 **Learning Objectives**
+By completing this exercise, you'll learn to:
+- Use AI assistants for systematic React development
+- Apply modern prompting techniques for code generation
+- Implement custom React hooks with TypeScript
+- Handle localStorage with proper error handling
+- Create smooth user interactions with CSS animations
+
+### 🔍 **Current Component Analysis**
+
+**Your Current LaptopCard Component (`frontend/src/components/Laptop/LaptopCard.tsx`)**:
+- ✅ Uses modern React patterns with hooks
+- ✅ Proper TypeScript interfaces
+- ✅ Cart integration with `addToCart(laptop, 'laptop', 1)`
+- ✅ Stock validation and loading states
+- ✅ Clean component structure with separated concerns
+
+**File Paths Verified**:
+- ✅ `frontend/src/components/Laptop/LaptopCard.tsx` - Main component
+- ✅ `frontend/src/components/Layout/Header.tsx` - Navigation
+- ✅ `frontend/src/App.tsx` - Routing configuration
+- ✅ Java Spring Boot backend running on port 8080
+
+### 🤖 **Modern AI Prompting Techniques**
+
+#### **1. Chain-of-Thought Development**
+Use this systematic approach with your AI assistant:
+
+```
+**Prompt Template:**
+"I need to add a favorites feature to my React laptop store. Let me break this down step by step:
+
+1. First, analyze my current LaptopCard component structure
+2. Then, design a custom hook for favorites management
+3. Next, implement the UI with proper TypeScript types
+4. Finally, add smooth animations and error handling
+
+Here's my current component: [paste LaptopCard.tsx]
+
+Can you help me plan the implementation step by step?"
+```
+
+#### **2. Role-Based Prompting**
+Frame your AI assistant as a React mentor:
+
+```
+**Prompt Template:**
+"Act as a senior React developer teaching a junior developer. I want to add favorites functionality to my laptop store. 
+
+Here are my requirements:
+- Heart icon that toggles on/off
+- localStorage persistence 
+- TypeScript throughout
+- Smooth animations
+- Proper error handling
+
+Please explain each step and why we're doing it that way, then show me the code."
+```
+
+#### **3. Few-Shot Learning Examples**
+Provide examples of similar patterns in your codebase:
+
+```
+**Prompt Template:**
+"Looking at how my cart functionality works in CartContext.tsx:
+- Uses localStorage for persistence
+- Handles loading states
+- Provides custom hook (useCart)
+- Manages complex state
+
+I want to create similar functionality for favorites. Can you follow the same patterns but for a simpler favorites system?"
+```
+
+### 🛠️ **Implementation Guide**
+
+#### **Step 1: Create the Favorites Hook**
+**Prompt for AI Assistant:**
+```
+"Help me create a custom hook called `useFavorites` that:
+1. Manages favorite laptop IDs in localStorage
+2. Provides addFavorite, removeFavorite, and isFavorite functions
+3. Handles errors gracefully
+4. Uses TypeScript interfaces
+5. Follows the same patterns as my existing useCart hook
+
+Here's my current useCart implementation: [paste CartContext.tsx]"
+```
+
+**Expected Output Location:** `frontend/src/hooks/useFavorites.ts`
+
+#### **Step 2: Update LaptopCard Component**
+**Prompt for AI Assistant:**
+```
+"Update my LaptopCard component to include a favorites heart icon:
+1. Add a heart icon button to the header area
+2. Use filled heart (❤️) for favorites, outline heart (🤍) for not favorites
+3. Add hover effects and click animations
+4. Position it in the top-right of the card
+5. Integrate with the useFavorites hook
+
+Current component: [paste LaptopCard.tsx]
+CSS file: [paste LaptopCard.css]"
+```
+
+#### **Step 3: Create Favorites Page**
+**Prompt for AI Assistant:**
+```
+"Create a new Favorites page component that:
+1. Shows all favorited laptops in a grid layout
+2. Reuses the existing LaptopCard component
+3. Handles empty state with nice message
+4. Follows the same patterns as my Laptops page
+
+Here's my current Laptops page: [paste Laptops.tsx]"
+```
+
+**Expected Output Location:** `frontend/src/pages/Favorites.tsx`
+
+#### **Step 4: Update Navigation**
+**Prompt for AI Assistant:**
+```
+"Add a Favorites link to my navigation:
+1. Add to Header.tsx navigation menu
+2. Add route to App.tsx
+3. Use heart icon (❤️) for the nav link
+4. Show count of favorites if any
+
+Current files:
+Header.tsx: [paste Header.tsx]
+App.tsx: [paste App.tsx]"
+```
+
+### 🎨 **Advanced Styling Prompts**
+
+**CSS Animation Prompt:**
+```
+"Add smooth animations for the heart icon:
+1. Scale effect on click
+2. Color transition on hover  
+3. Pulse effect when toggling
+4. Smooth transitions between states
+
+Current CSS: [paste LaptopCard.css]"
+```
+
+### ✅ **Self-Consistency Validation**
+
+Use these prompts to verify your implementation:
+
+**Code Review Prompt:**
+```
+"Review my favorites implementation for:
+1. TypeScript type safety
+2. React best practices
+3. Error handling completeness
+4. Performance considerations
+5. Accessibility features
+
+Code: [paste your implementation]"
+```
+
+**Testing Prompt:**
+```
+"Help me create test scenarios for my favorites feature:
+1. Adding/removing favorites
+2. localStorage persistence
+3. Error handling
+4. Component rendering
+5. Integration with existing cart
+
+What edge cases should I test?"
+```
+
+### 🚀 **Success Criteria**
+- ✅ Heart icon appears on all laptop cards
+- ✅ Clicking toggles favorite state with animation
+- ✅ Favorites persist after page refresh
+- ✅ Favorites page shows saved laptops
+- ✅ Navigation includes favorites link with count
+- ✅ No TypeScript errors
+- ✅ Smooth user experience
+
+### 🔧 **Validation Commands**
+After implementation, run these commands to ensure everything works:
+
+```bash
+# Frontend type checking
+cd frontend && npm run build
+
+# Start development server
+npm start
+
+# Test the feature
+# 1. Click heart icons on laptop cards
+# 2. Navigate to /favorites
+# 3. Refresh page and verify persistence
+# 4. Check browser console for errors
+```
+
+### 🎓 **Learning Outcomes**
+This exercise teaches you to:
+- **Systematically approach** React development with AI assistance
+- **Use modern prompting** techniques for better code generation
+- **Apply TypeScript** best practices in React
+- **Handle state management** with custom hooks
+- **Create smooth UX** with CSS animations
+- **Validate implementations** thoroughly
+
+**Next Exercise:** Move on to Exercise 4 to implement the computer mice functionality using similar AI-assisted patterns.
