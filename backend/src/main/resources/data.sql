@@ -1,9 +1,9 @@
 -- Insert sample users (passwords are encoded with BCrypt)
--- password123 -> $2a$10$E6UqjzBKOqFRGmJr.FxdOOJy5y9oo/Uw5hnGxS9Xw6PbLKCOJBYcO
--- securepass456 -> $2a$10$cLp4YNQhYQQRfR7FyIR8AuO3Mhj.GhAjOhHtDfvOE7VsRzL9W8Kx.
+-- password123 -> $2a$10$XLiZtyOC4a8ZMvJgPhYbDeVSZazP.5iQW8NULUj0uCn62Z.L5rZK2
+-- securepass456 -> $2a$10$izKSoXVDmVvZAIXSumI/UOu/A1Tne4Xazjnd/K0hl5fJM0ldZ7URe
 INSERT INTO users (username, email, password_hash, created_at) VALUES
-('john_doe', 'john@example.com', '$2a$10$E6UqjzBKOqFRGmJr.FxdOOJy5y9oo/Uw5hnGxS9Xw6PbLKCOJBYcO', '2024-01-15 10:30:00'),
-('jane_smith', 'jane@example.com', '$2a$10$cLp4YNQhYQQRfR7FyIR8AuO3Mhj.GhAjOhHtDfvOE7VsRzL9W8Kx.', '2024-01-16 14:20:00');
+('john_doe', 'john@example.com', '$2a$10$XLiZtyOC4a8ZMvJgPhYbDeVSZazP.5iQW8NULUj0uCn62Z.L5rZK2', '2024-01-15 10:30:00'),
+('jane_smith', 'jane@example.com', '$2a$10$izKSoXVDmVvZAIXSumI/UOu/A1Tne4Xazjnd/K0hl5fJM0ldZ7URe', '2024-01-16 14:20:00');
 
 -- Insert laptops (Latest 2024-2025 Models)
 INSERT INTO laptops (brand, model, processor, ram_gb, storage_gb, graphics, screen_size, price, stock_quantity, created_at) VALUES
