@@ -133,14 +133,56 @@ frontend/
 │       └── format.ts    # Price formatting utilities
 ```
 
-## 🚀 Quick Start
+## 🚀 System Requirements & Setup
 
-### Prerequisites
-- **Java 17+** with Maven
-- **Node.js 16+** with npm
-- **Git** for version control
+### 📋 Prerequisites
 
-### 1. Clone and Setup Backend
+#### Required Software & Versions
+- **☕ Java Development Kit (JDK)**
+  - **Version**: Java 17 or higher (Java 21 recommended)
+  - **Download**: [Oracle JDK](https://www.oracle.com/java/technologies/downloads/) or [OpenJDK](https://openjdk.org/install/)
+  - **Verify**: `java -version` and `javac -version`
+
+- **📦 Apache Maven**
+  - **Version**: Maven 3.6.0 or higher
+  - **Download**: [Maven Downloads](https://maven.apache.org/download.cgi)
+  - **Verify**: `mvn -version`
+
+- **🟢 Node.js & npm**
+  - **Version**: Node.js 16.x or higher (Node.js 18.x+ recommended)
+  - **npm**: Version 8.x or higher (comes with Node.js)
+  - **Download**: [Node.js Official](https://nodejs.org/)
+  - **Verify**: `node -v` and `npm -v`
+
+- **🔧 Git**
+  - **Version**: Git 2.x or higher
+  - **Download**: [Git Downloads](https://git-scm.com/downloads)
+  - **Verify**: `git --version`
+
+#### Platform Support
+- ✅ **macOS**: Intel & Apple Silicon (M1/M2/M3)
+- ✅ **Linux**: Ubuntu 20.04+, CentOS 8+, Debian 11+
+- ✅ **Windows**: Windows 10+, Windows 11
+
+### 🚀 Quick Start Guide
+
+#### Option 1: Automated Setup (Recommended)
+```bash
+# Clone the repository
+git clone https://github.com/mshnjffr/e_commerce_store.git
+cd e_commerce_store
+
+# Start both backend and frontend automatically
+# For Mac/Linux:
+./start-dev.sh
+
+# For Windows:
+start-dev.bat
+```
+
+#### Option 2: Manual Setup
+
+##### 1. Clone and Setup Backend
 ```bash
 # Clone the repository
 git clone https://github.com/mshnjffr/e_commerce_store.git
@@ -148,14 +190,17 @@ cd e_commerce_store
 
 # Setup and run Java Spring Boot backend
 cd backend
-mvn spring-boot:run
+mvn clean install    # Download dependencies and build
+mvn spring-boot:run   # Start the server
 ```
 Backend will be available at `http://localhost:8000`
 
-### 2. Setup Frontend
+##### 2. Setup Frontend (New Terminal)
 ```bash
-# In a new terminal, setup frontend
-cd frontend
+# Navigate to frontend directory
+cd e_commerce_store/frontend
+
+# Install dependencies
 npm install
 
 # Start development server
@@ -163,11 +208,161 @@ npm start
 ```
 Frontend will be available at `http://localhost:3000`
 
-### 3. Access the Application
-- **Main App**: http://localhost:3000
-- **Exercises**: http://localhost:3000/exercises
-- **Backend Health**: http://localhost:8000
-- **H2 Database Console**: http://localhost:8000/h2-console (JDBC URL: `jdbc:h2:mem:testdb`)
+### 🌐 Access Points
+- **🏠 Main Application**: http://localhost:3000
+- **📚 Training Exercises**: http://localhost:3000/exercises
+- **🔌 Backend API**: http://localhost:8000
+- **🗄️ H2 Database Console**: http://localhost:8000/h2-console
+  - **JDBC URL**: `jdbc:h2:mem:laptopstore`
+  - **Username**: `sa`
+  - **Password**: *(leave empty)*
+
+### 🔍 Verification Commands
+
+#### Backend Health Check
+```bash
+# Test backend is running
+curl http://localhost:8000/api/v1/laptops
+
+# Test authentication endpoint
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"username":"john_doe","password":"password123"}' \
+  http://localhost:8000/api/v1/auth/login
+```
+
+#### Frontend Build Check
+```bash
+cd frontend
+npm run build    # Verify TypeScript compilation
+npm test         # Run test suite
+```
+
+### ⚠️ Troubleshooting Common Issues
+
+#### Java Issues
+```bash
+# Check Java version
+java -version
+# Should show Java 17+ (e.g., "openjdk version 17.0.x")
+
+# If Java not found or wrong version:
+# - Install/update Java JDK 17+
+# - Set JAVA_HOME environment variable
+# - Add Java to PATH
+```
+
+#### Maven Issues
+```bash
+# Check Maven version
+mvn -version
+# Should show Maven 3.6.0+
+
+# If Maven not found:
+# - Download and install Maven
+# - Set M2_HOME environment variable
+# - Add Maven bin directory to PATH
+```
+
+#### Node.js/npm Issues
+```bash
+# Check Node.js version
+node -v
+# Should show v16.x.x or higher
+
+# Check npm version
+npm -v
+# Should show 8.x.x or higher
+
+# If Node.js not found or outdated:
+# - Install/update Node.js from nodejs.org
+# - npm will be included automatically
+```
+
+#### Port Conflicts
+```bash
+# If port 8000 is in use:
+lsof -ti:8000 | xargs kill -9  # Kill process on port 8000
+
+# If port 3000 is in use:
+lsof -ti:3000 | xargs kill -9  # Kill process on port 3000
+
+# Alternative: Use different ports
+# Backend: mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8001
+# Frontend: PORT=3001 npm start
+```
+
+#### Permission Issues (Unix/macOS)
+```bash
+# Make startup script executable
+chmod +x start-dev.sh
+
+# If npm permission errors:
+npm config set prefix ~/.npm-global
+export PATH=~/.npm-global/bin:$PATH
+```
+
+### 🏗️ Development Tools (Optional but Recommended)
+
+#### IDEs & Editors
+- **Java Development**: IntelliJ IDEA, Eclipse, VS Code with Java extensions
+- **Frontend Development**: VS Code, WebStorm, Sublime Text
+- **Database**: DBeaver, TablePlus (for H2 database inspection)
+
+#### Useful Extensions/Plugins
+- **VS Code**: Java Extension Pack, ES7+ React/Redux/React-Native snippets
+- **Browser**: React Developer Tools, Redux DevTools
+
+### 📦 Project Dependencies
+
+#### Backend Dependencies (Java/Maven)
+```xml
+<!-- Core Framework -->
+Spring Boot 3.2.0                    <!-- Main framework -->
+Spring Data JPA                      <!-- Database ORM -->
+Spring Security 6.2.0                <!-- Authentication & authorization -->
+Spring Web                           <!-- REST API support -->
+
+<!-- Database -->
+H2 Database 2.2.224                  <!-- In-memory database -->
+Hibernate 6.3.1                      <!-- JPA implementation -->
+
+<!-- Security & JWT -->
+JJWT 0.12.3                          <!-- JWT token handling -->
+BCrypt                               <!-- Password hashing -->
+
+<!-- Validation & Utilities -->
+Jakarta Validation API               <!-- Request validation -->
+Jackson 2.15.3                       <!-- JSON serialization -->
+```
+
+#### Frontend Dependencies (Node.js/npm)
+```json
+{
+  "dependencies": {
+    "react": "^19.1.0",               // React framework
+    "react-dom": "^19.1.0",          // React DOM rendering
+    "react-router-dom": "^6.8.0",    // Client-side routing
+    "typescript": "^4.9.5",          // TypeScript support
+    "axios": "^1.6.0",               // HTTP client for API calls
+    "@types/react": "^19.1.6",       // React TypeScript types
+    "@types/react-dom": "^19.1.5",   // React DOM TypeScript types
+    "react-scripts": "5.0.1",        // Build tools and dev server
+    "web-vitals": "^2.1.4"           // Performance monitoring
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.0",  // React testing utilities
+    "@testing-library/jest-dom": "^6.6.3", // Jest DOM matchers
+    "@testing-library/user-event": "^13.5.0" // User interaction testing
+  }
+}
+```
+
+#### Runtime Requirements Summary
+- **Java**: OpenJDK/Oracle JDK 17+ (backend compilation & runtime)
+- **Maven**: 3.6.0+ (dependency management & build)
+- **Node.js**: 16.x+ (frontend development & build)
+- **npm**: 8.x+ (package management)
+- **Browser**: Modern browser with ES6+ support
 
 ## 🎓 AI Assistant Training Exercises
 
@@ -286,6 +481,11 @@ npm run test:coverage    # Run with coverage report
 Username: john_doe     | Password: password123
 Username: jane_smith   | Password: securepass456
 ```
+
+**Login Instructions:**
+1. Navigate to http://localhost:3000/login  
+2. Use credentials: `john_doe` / `password123` or `jane_smith` / `securepass456`
+3. Successfully authenticated users can access cart and order features
 
 ### Sample Products
 - **10 Latest Laptops**: MacBook Pro M4, Dell XPS 13, ThinkPad X1, etc.
