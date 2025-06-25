@@ -8,6 +8,15 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import java.util.Date;
 
+/**
+ * JWT Token Provider using modern JJWT 0.12.x API
+ * 
+ * This component handles JWT token generation, parsing, and validation.
+ * Updated to use the latest JJWT API methods replacing deprecated ones:
+ * - setSigningKey() → verifyWith()
+ * - parseClaimsJws() → parseSignedClaims()
+ * - setSubject(), setIssuedAt(), setExpiration() → subject(), issuedAt(), expiration()
+ */
 @Component
 public class JwtTokenProvider {
     
@@ -26,19 +35,19 @@ public class JwtTokenProvider {
         Date expiryDate = new Date(now.getTime() + jwtExpirationMs);
         
         return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(now)
-                .setExpiration(expiryDate)
+                .subject(username)
+                .issuedAt(now)
+                .expiration(expiryDate)
                 .signWith(getSigningKey())
                 .compact();
     }
     
     public String getUsernameFromToken(String token) {
         Claims claims = Jwts.parser()
-                .setSigningKey(getSigningKey())
+                .verifyWith(getSigningKey())
                 .build()
-                .parseClaimsJws(token)
-                .getBody();
+                .parseSignedClaims(token)
+                .getPayload();
         
         return claims.getSubject();
     }
@@ -46,9 +55,9 @@ public class JwtTokenProvider {
     public boolean validateToken(String token) {
         try {
             Jwts.parser()
-                .setSigningKey(getSigningKey())
+                .verifyWith(getSigningKey())
                 .build()
-                .parseClaimsJws(token);
+                .parseSignedClaims(token);
             return true;
         } catch (JwtException | IllegalArgumentException e) {
             return false;
