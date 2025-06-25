@@ -1,6 +1,5 @@
 package com.example.laptopstore.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -14,20 +13,15 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = false)
-    @JsonProperty("order_id")
-    private Order order;
+    @NotNull
+    @Column(name = "order_id")
+    private Long orderId;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "laptop_id")
-    @JsonProperty("laptop_id")
-    private Laptop laptop;
+    @Column(name = "laptop_id")
+    private Long laptopId;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mouse_id")
-    @JsonProperty("mouse_id")
-    private Mouse mouse;
+    @Column(name = "mouse_id")
+    private Long mouseId;
     
     @NotNull
     @Positive
@@ -36,47 +30,17 @@ public class OrderItem {
     @NotNull
     @Positive
     @Column(name = "unit_price")
-    @JsonProperty("unit_price")
     private BigDecimal unitPrice;
     
     // Constructors
     public OrderItem() {}
     
-    public OrderItem(Order order, Laptop laptop, Integer quantity, BigDecimal unitPrice) {
-        this.order = order;
-        this.laptop = laptop;
+    public OrderItem(Long orderId, Long laptopId, Long mouseId, Integer quantity, BigDecimal unitPrice) {
+        this.orderId = orderId;
+        this.laptopId = laptopId;
+        this.mouseId = mouseId;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
-    }
-    
-    public OrderItem(Order order, Mouse mouse, Integer quantity, BigDecimal unitPrice) {
-        this.order = order;
-        this.mouse = mouse;
-        this.quantity = quantity;
-        this.unitPrice = unitPrice;
-    }
-    
-    // Business methods
-    public BigDecimal getTotalPrice() {
-        return unitPrice.multiply(BigDecimal.valueOf(quantity));
-    }
-    
-    public String getProductName() {
-        if (laptop != null) {
-            return laptop.getBrand() + " " + laptop.getModel();
-        } else if (mouse != null) {
-            return mouse.getBrand() + " " + mouse.getModel();
-        }
-        return "Unknown Product";
-    }
-    
-    public String getProductType() {
-        if (laptop != null) {
-            return "Laptop";
-        } else if (mouse != null) {
-            return "Mouse";
-        }
-        return "Unknown";
     }
     
     // Getters and Setters
@@ -88,28 +52,28 @@ public class OrderItem {
         this.id = id;
     }
     
-    public Order getOrder() {
-        return order;
+    public Long getOrderId() {
+        return orderId;
     }
     
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
     
-    public Laptop getLaptop() {
-        return laptop;
+    public Long getLaptopId() {
+        return laptopId;
     }
     
-    public void setLaptop(Laptop laptop) {
-        this.laptop = laptop;
+    public void setLaptopId(Long laptopId) {
+        this.laptopId = laptopId;
     }
     
-    public Mouse getMouse() {
-        return mouse;
+    public Long getMouseId() {
+        return mouseId;
     }
     
-    public void setMouse(Mouse mouse) {
-        this.mouse = mouse;
+    public void setMouseId(Long mouseId) {
+        this.mouseId = mouseId;
     }
     
     public Integer getQuantity() {
@@ -126,5 +90,21 @@ public class OrderItem {
     
     public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
+    }
+    
+    public boolean hasLaptop() {
+        return laptopId != null;
+    }
+    
+    public boolean hasMouse() {
+        return mouseId != null;
+    }
+    
+    public boolean isValid() {
+        return (laptopId != null && mouseId == null) || (laptopId == null && mouseId != null);
+    }
+    
+    public BigDecimal getTotalPrice() {
+        return unitPrice.multiply(BigDecimal.valueOf(quantity));
     }
 }

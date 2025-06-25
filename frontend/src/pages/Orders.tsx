@@ -134,21 +134,23 @@ const Orders: React.FC = () => {
                       {order.status}
                     </span>
                     <div className="order-total">
-                      {formatPrice(order.total_amount)}
+                      {formatPrice(order.totalAmount)}
                     </div>
                   </div>
                 </div>
 
                 <div className="order-summary">
                   <div className="items-summary">
-                    <span className="items-count">
-                      {order.items.length} item{order.items.length !== 1 ? 's' : ''}
-                    </span>
+                    {(() => {
+                      const totalQuantity = order.items.reduce((total, item) => total + item.quantity, 0);
+                      return (
+                        <span className="items-count">
+                          {totalQuantity} item{totalQuantity !== 1 ? 's' : ''}
+                        </span>
+                      );
+                    })()}
                     <span className="first-item">
-                      {order.items[0]?.laptop ? 
-                        `${order.items[0].laptop.brand} ${order.items[0].laptop.model}` :
-                        'Laptop'
-                      }
+                      {order.items[0]?.productName || 'Laptop'}
                       {order.items.length > 1 && ` and ${order.items.length - 1} more`}
                     </span>
                   </div>
@@ -168,30 +170,19 @@ const Orders: React.FC = () => {
                       {order.items.map((item) => (
                         <div key={item.id} className="order-item">
                           <div className="item-info">
-                            <h5>
-                              {item.laptop ? 
-                                `${item.laptop.brand} ${item.laptop.model}` :
-                                'Laptop'
-                              }
-                            </h5>
-                            {item.laptop && (
-                              <div className="item-specs">
-                                <span>{item.laptop.processor}</span>
-                                <span>•</span>
-                                <span>{item.laptop.ram_gb}GB RAM</span>
-                                <span>•</span>
-                                <span>{item.laptop.storage_gb}GB Storage</span>
-                              </div>
-                            )}
+                            <h5>{item.productName}</h5>
+                            <div className="item-specs">
+                              <span>{item.productType}</span>
+                            </div>
                           </div>
                           
                           <div className="item-pricing">
                             <div className="quantity">Qty: {item.quantity}</div>
                             <div className="unit-price">
-                              {formatPrice(item.unit_price)} each
+                              {formatPrice(item.unitPrice)} each
                             </div>
                             <div className="item-total">
-                              {formatPrice(item.unit_price * item.quantity)}
+                              {formatPrice(item.totalPrice)}
                             </div>
                           </div>
                         </div>
@@ -215,7 +206,7 @@ const Orders: React.FC = () => {
                       <div className="order-total-breakdown">
                         <div className="total-row">
                           <span>Total:</span>
-                          <span className="total-amount">{formatPrice(order.total_amount)}</span>
+                          <span className="total-amount">{formatPrice(order.totalAmount)}</span>
                         </div>
                       </div>
                     </div>

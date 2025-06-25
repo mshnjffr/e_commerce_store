@@ -2,6 +2,7 @@ package com.example.laptopstore.controller;
 
 import com.example.laptopstore.dto.MessageResponseDto;
 import com.example.laptopstore.dto.OrderCreateDto;
+import com.example.laptopstore.dto.OrderResponseDto;
 import com.example.laptopstore.entity.Order;
 import com.example.laptopstore.security.CurrentUser;
 import com.example.laptopstore.service.OrderService;
@@ -28,7 +29,7 @@ public class OrderController {
     public ResponseEntity<?> createOrder(@Valid @RequestBody OrderCreateDto orderCreateDto, 
                                        @CurrentUser Long userId) {
         try {
-            Order order = orderService.createOrder(userId, orderCreateDto);
+            OrderResponseDto order = orderService.createOrder(userId, orderCreateDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(order);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(new MessageResponseDto(e.getMessage()));
@@ -37,16 +38,16 @@ public class OrderController {
     
     @GetMapping
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<List<Order>> getUserOrders(@CurrentUser Long userId) {
-        List<Order> orders = orderService.getUserOrders(userId);
+    public ResponseEntity<List<OrderResponseDto>> getUserOrders(@CurrentUser Long userId) {
+        List<OrderResponseDto> orders = orderService.getUserOrders(userId);
         return ResponseEntity.ok(orders);
     }
     
     @GetMapping("/{orderId}")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<Order> getOrderById(@PathVariable Long orderId, 
-                                            @CurrentUser Long userId) {
-        Optional<Order> order = orderService.getOrderById(orderId, userId);
+    public ResponseEntity<OrderResponseDto> getOrderById(@PathVariable Long orderId, 
+                                                        @CurrentUser Long userId) {
+        Optional<OrderResponseDto> order = orderService.getOrderById(orderId, userId);
         return order.map(ResponseEntity::ok)
                    .orElse(ResponseEntity.notFound().build());
     }
@@ -56,7 +57,7 @@ public class OrderController {
     public ResponseEntity<?> updateOrderStatus(@PathVariable Long orderId, 
                                              @RequestParam Order.OrderStatus status) {
         try {
-            Order order = orderService.updateOrderStatus(orderId, status);
+            OrderResponseDto order = orderService.updateOrderStatus(orderId, status);
             return ResponseEntity.ok(order);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(new MessageResponseDto(e.getMessage()));

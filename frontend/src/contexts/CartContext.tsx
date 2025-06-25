@@ -104,9 +104,10 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     try {
       const orderData: OrderCreate = {
         items: items.map(item => ({
-          laptop_id: item.type === 'laptop' ? item.product.id : undefined,
-          mice_id: item.type === 'mice' ? item.product.id : undefined,
-          quantity: item.quantity
+          laptopId: item.type === 'laptop' ? item.product.id : undefined,
+          mouseId: item.type === 'mice' ? item.product.id : undefined,
+          quantity: item.quantity,
+          unitPrice: item.product.price
         }))
       };
 

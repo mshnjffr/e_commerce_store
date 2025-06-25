@@ -2,9 +2,16 @@ package com.example.laptopstore.service;
 
 import com.example.laptopstore.dto.OrderCreateDto;
 import com.example.laptopstore.dto.OrderItemCreateDto;
-import com.example.laptopstore.entity.*;
-import com.example.laptopstore.repository.OrderRepository;
+import com.example.laptopstore.dto.OrderItemResponseDto;
+import com.example.laptopstore.dto.OrderResponseDto;
+import com.example.laptopstore.entity.Laptop;
+import com.example.laptopstore.entity.Mouse;
+import com.example.laptopstore.entity.Order;
+import com.example.laptopstore.entity.OrderItem;
+import com.example.laptopstore.repository.LaptopRepository;
+import com.example.laptopstore.repository.MouseRepository;
 import com.example.laptopstore.repository.OrderItemRepository;
+import com.example.laptopstore.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +22,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 public class OrderService {
     
     @Autowired
@@ -25,126 +31,191 @@ public class OrderService {
     private OrderItemRepository orderItemRepository;
     
     @Autowired
-    private UserService userService;
+    private LaptopRepository laptopRepository;
     
     @Autowired
-    private LaptopService laptopService;
+    private MouseRepository mouseRepository;
     
-    @Autowired
-    private MouseService mouseService;
-    
-    public Order createOrder(Long userId, OrderCreateDto orderCreateDto) {
-        User user = userService.findById(userId)
-            .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+    @Transactional
+    public OrderResponseDto createOrder(Long userId, OrderCreateDto orderCreateDto) {
+        // Validate order items
+        List<OrderItemCreateDto> itemsDto = orderCreateDto.getItems();
+        if (itemsDto == null || itemsDto.isEmpty()) {
+            throw new RuntimeException("Order must contain at least one item");
+        }
         
-        // Validate order items and check stock
-        validateOrderItems(orderCreateDto.getItems());
-        
-        // Calculate total amount
-        BigDecimal totalAmount = calculateTotalAmount(orderCreateDto.getItems());
+        // Calculate total amount and validate items
+        BigDecimal totalAmount = BigDecimal.ZERO;
+        for (OrderItemCreateDto itemDto : itemsDto) {
+            if (!itemDto.isValid()) {
+                throw new RuntimeException("Each item must have either a laptop or mouse, but not both");
+            }
+            
+            // Validate product exists and has sufficient stock
+            if (itemDto.hasLaptop()) {
+                Laptop laptop = laptopRepository.findById(itemDto.getLaptopId())
+                    .orElseThrow(() -> new RuntimeException("Laptop not found with id: " + itemDto.getLaptopId()));
+                if (laptop.getStockQuantity() < itemDto.getQuantity()) {
+                    throw new RuntimeException("Insufficient stock for laptop: " + laptop.getModel());
+                }
+            } else if (itemDto.hasMouse()) {
+                Mouse mouse = mouseRepository.findById(itemDto.getMouseId())
+                    .orElseThrow(() -> new RuntimeException("Mouse not found with id: " + itemDto.getMouseId()));
+                if (mouse.getStockQuantity() < itemDto.getQuantity()) {
+                    throw new RuntimeException("Insufficient stock for mouse: " + mouse.getModel());
+                }
+            }
+            
+            BigDecimal itemTotal = itemDto.getUnitPrice().multiply(BigDecimal.valueOf(itemDto.getQuantity()));
+            totalAmount = totalAmount.add(itemTotal);
+        }
         
         // Create order
-        Order order = new Order(user, totalAmount);
-        Order savedOrder = orderRepository.save(order);
+        Order order = new Order(userId, totalAmount, Order.OrderStatus.PENDING);
+        order = orderRepository.save(order);
         
         // Create order items and update stock
-        List<OrderItem> orderItems = new ArrayList<>();
-        for (OrderItemCreateDto itemDto : orderCreateDto.getItems()) {
-            OrderItem orderItem = createOrderItem(savedOrder, itemDto);
-            orderItems.add(orderItem);
+        List<OrderItemResponseDto> itemResponses = new ArrayList<>();
+        for (OrderItemCreateDto itemDto : itemsDto) {
+            OrderItem orderItem = new OrderItem(
+                order.getId(),
+                itemDto.getLaptopId(),
+                itemDto.getMouseId(),
+                itemDto.getQuantity(),
+                itemDto.getUnitPrice()
+            );
+            orderItem = orderItemRepository.save(orderItem);
             
             // Update stock
+            String productName;
+            String productType;
             if (itemDto.hasLaptop()) {
-                laptopService.updateStock(itemDto.getLaptopId(), itemDto.getQuantity());
-            } else if (itemDto.hasMouse()) {
-                mouseService.updateStock(itemDto.getMouseId(), itemDto.getQuantity());
-            }
-        }
-        
-        orderItemRepository.saveAll(orderItems);
-        savedOrder.setItems(orderItems);
-        
-        return savedOrder;
-    }
-    
-    @Transactional(readOnly = true)
-    public List<Order> getUserOrders(Long userId) {
-        return orderRepository.findByUserIdOrderByCreatedAtDesc(userId);
-    }
-    
-    @Transactional(readOnly = true)
-    public Optional<Order> getOrderById(Long orderId, Long userId) {
-        return orderRepository.findByIdAndUserId(orderId, userId);
-    }
-    
-    public Order updateOrderStatus(Long orderId, Order.OrderStatus status) {
-        Order order = orderRepository.findById(orderId)
-            .orElseThrow(() -> new RuntimeException("Order not found with id: " + orderId));
-        
-        order.setStatus(status);
-        return orderRepository.save(order);
-    }
-    
-    public void deleteOrder(Long orderId, Long userId) {
-        Order order = orderRepository.findByIdAndUserId(orderId, userId)
-            .orElseThrow(() -> new RuntimeException("Order not found with id: " + orderId));
-        
-        if (order.getStatus() != Order.OrderStatus.PENDING) {
-            throw new RuntimeException("Only pending orders can be deleted");
-        }
-        
-        // Restore stock for all items
-        for (OrderItem item : order.getItems()) {
-            if (item.getLaptop() != null) {
-                Laptop laptop = item.getLaptop();
-                laptop.setStockQuantity(laptop.getStockQuantity() + item.getQuantity());
-            } else if (item.getMouse() != null) {
-                Mouse mouse = item.getMouse();
-                mouse.setStockQuantity(mouse.getStockQuantity() + item.getQuantity());
-            }
-        }
-        
-        orderRepository.delete(order);
-    }
-    
-    private void validateOrderItems(List<OrderItemCreateDto> items) {
-        for (OrderItemCreateDto item : items) {
-            if (!item.isValid()) {
-                throw new RuntimeException("Each order item must specify exactly one product (laptop or mouse)");
+                Laptop laptop = laptopRepository.findById(itemDto.getLaptopId()).get();
+                laptop.setStockQuantity(laptop.getStockQuantity() - itemDto.getQuantity());
+                laptopRepository.save(laptop);
+                productName = laptop.getBrand() + " " + laptop.getModel();
+                productType = "Laptop";
+            } else {
+                Mouse mouse = mouseRepository.findById(itemDto.getMouseId()).get();
+                mouse.setStockQuantity(mouse.getStockQuantity() - itemDto.getQuantity());
+                mouseRepository.save(mouse);
+                productName = mouse.getBrand() + " " + mouse.getModel();
+                productType = "Mouse";
             }
             
+            OrderItemResponseDto itemResponse = OrderItemResponseDto.fromEntity(orderItem, productName, productType);
+            itemResponses.add(itemResponse);
+        }
+        
+        // Create response
+        OrderResponseDto response = OrderResponseDto.fromEntity(order);
+        response.setItems(itemResponses);
+        
+        return response;
+    }
+    
+    public List<OrderResponseDto> getUserOrders(Long userId) {
+        List<Order> orders = orderRepository.findByUserIdOrderByCreatedAtDesc(userId);
+        List<OrderResponseDto> responses = new ArrayList<>();
+        
+        for (Order order : orders) {
+            OrderResponseDto response = OrderResponseDto.fromEntity(order);
+            response.setItems(getOrderItemsResponse(order.getId()));
+            responses.add(response);
+        }
+        
+        return responses;
+    }
+    
+    public Optional<OrderResponseDto> getOrderById(Long orderId, Long userId) {
+        Optional<Order> orderOpt = orderRepository.findByIdAndUserId(orderId, userId);
+        if (orderOpt.isEmpty()) {
+            return Optional.empty();
+        }
+        
+        Order order = orderOpt.get();
+        OrderResponseDto response = OrderResponseDto.fromEntity(order);
+        response.setItems(getOrderItemsResponse(order.getId()));
+        
+        return Optional.of(response);
+    }
+    
+    @Transactional
+    public OrderResponseDto updateOrderStatus(Long orderId, Order.OrderStatus status) {
+        Order order = orderRepository.findById(orderId)
+            .orElseThrow(() -> new RuntimeException("Order not found"));
+        
+        order.setStatus(status);
+        order = orderRepository.save(order);
+        
+        OrderResponseDto response = OrderResponseDto.fromEntity(order);
+        response.setItems(getOrderItemsResponse(order.getId()));
+        
+        return response;
+    }
+    
+    @Transactional
+    public void deleteOrder(Long orderId, Long userId) {
+        Order order = orderRepository.findByIdAndUserId(orderId, userId)
+            .orElseThrow(() -> new RuntimeException("Order not found"));
+        
+        if (order.getStatus() != Order.OrderStatus.PENDING) {
+            throw new RuntimeException("Can only cancel pending orders");
+        }
+        
+        // Restore stock quantities
+        List<OrderItem> items = orderItemRepository.findByOrderIdOrderById(orderId);
+        for (OrderItem item : items) {
             if (item.hasLaptop()) {
-                if (!laptopService.isStockAvailable(item.getLaptopId(), item.getQuantity())) {
-                    throw new RuntimeException("Insufficient stock for laptop with id: " + item.getLaptopId());
-                }
+                Laptop laptop = laptopRepository.findById(item.getLaptopId()).get();
+                laptop.setStockQuantity(laptop.getStockQuantity() + item.getQuantity());
+                laptopRepository.save(laptop);
             } else if (item.hasMouse()) {
-                if (!mouseService.isStockAvailable(item.getMouseId(), item.getQuantity())) {
-                    throw new RuntimeException("Insufficient stock for mouse with id: " + item.getMouseId());
-                }
+                Mouse mouse = mouseRepository.findById(item.getMouseId()).get();
+                mouse.setStockQuantity(mouse.getStockQuantity() + item.getQuantity());
+                mouseRepository.save(mouse);
             }
         }
+        
+        // Delete order items and order
+        orderItemRepository.deleteByOrderId(orderId);
+        orderRepository.deleteById(orderId);
     }
     
-    private BigDecimal calculateTotalAmount(List<OrderItemCreateDto> items) {
-        BigDecimal total = BigDecimal.ZERO;
-        for (OrderItemCreateDto item : items) {
-            BigDecimal itemTotal = item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity()));
-            total = total.add(itemTotal);
+    private List<OrderItemResponseDto> getOrderItemsResponse(Long orderId) {
+        List<OrderItem> items = orderItemRepository.findByOrderIdOrderById(orderId);
+        List<OrderItemResponseDto> responses = new ArrayList<>();
+        
+        for (OrderItem item : items) {
+            String productName;
+            String productType;
+            
+            if (item.hasLaptop()) {
+                Optional<Laptop> laptopOpt = laptopRepository.findById(item.getLaptopId());
+                if (laptopOpt.isPresent()) {
+                    Laptop laptop = laptopOpt.get();
+                    productName = laptop.getBrand() + " " + laptop.getModel();
+                    productType = "Laptop";
+                } else {
+                    productName = "Unknown Laptop";
+                    productType = "Laptop";
+                }
+            } else {
+                Optional<Mouse> mouseOpt = mouseRepository.findById(item.getMouseId());
+                if (mouseOpt.isPresent()) {
+                    Mouse mouse = mouseOpt.get();
+                    productName = mouse.getBrand() + " " + mouse.getModel();
+                    productType = "Mouse";
+                } else {
+                    productName = "Unknown Mouse";
+                    productType = "Mouse";
+                }
+            }
+            
+            OrderItemResponseDto response = OrderItemResponseDto.fromEntity(item, productName, productType);
+            responses.add(response);
         }
-        return total;
-    }
-    
-    private OrderItem createOrderItem(Order order, OrderItemCreateDto itemDto) {
-        if (itemDto.hasLaptop()) {
-            Laptop laptop = laptopService.getLaptopById(itemDto.getLaptopId())
-                .orElseThrow(() -> new RuntimeException("Laptop not found with id: " + itemDto.getLaptopId()));
-            return new OrderItem(order, laptop, itemDto.getQuantity(), itemDto.getUnitPrice());
-        } else if (itemDto.hasMouse()) {
-            Mouse mouse = mouseService.getMouseById(itemDto.getMouseId())
-                .orElseThrow(() -> new RuntimeException("Mouse not found with id: " + itemDto.getMouseId()));
-            return new OrderItem(order, mouse, itemDto.getQuantity(), itemDto.getUnitPrice());
-        } else {
-            throw new RuntimeException("Order item must specify either laptop or mouse");
-        }
+        
+        return responses;
     }
 }

@@ -16,23 +16,18 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    @JsonProperty("user_id")
-    private User user;
+    @NotNull
+    @Column(name = "user_id")
+    private Long userId;
     
     @NotNull
     @Positive
     @Column(name = "total_amount")
-    @JsonProperty("total_amount")
     private BigDecimal totalAmount;
     
     @NotNull
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
-    
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<OrderItem> items;
     
     @Column(name = "created_at")
     @JsonProperty("created_at")
@@ -46,9 +41,6 @@ public class Order {
     protected void onCreate() {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
-        if (status == null) {
-            status = OrderStatus.PENDING;
-        }
     }
     
     @PreUpdate
@@ -59,10 +51,10 @@ public class Order {
     // Constructors
     public Order() {}
     
-    public Order(User user, BigDecimal totalAmount) {
-        this.user = user;
+    public Order(Long userId, BigDecimal totalAmount, OrderStatus status) {
+        this.userId = userId;
         this.totalAmount = totalAmount;
-        this.status = OrderStatus.PENDING;
+        this.status = status;
     }
     
     // Getters and Setters
@@ -74,12 +66,12 @@ public class Order {
         this.id = id;
     }
     
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
     
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
     
     public BigDecimal getTotalAmount() {
@@ -96,14 +88,6 @@ public class Order {
     
     public void setStatus(OrderStatus status) {
         this.status = status;
-    }
-    
-    public List<OrderItem> getItems() {
-        return items;
-    }
-    
-    public void setItems(List<OrderItem> items) {
-        this.items = items;
     }
     
     public LocalDateTime getCreatedAt() {

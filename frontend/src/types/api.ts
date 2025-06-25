@@ -56,8 +56,9 @@ export interface CartState {
 
 // Backend order types (supports both laptops and mice)
 export interface OrderItem {
-  laptop_id?: number;
+  laptopId?: number;
   quantity: number;
+  unitPrice: number;
 }
 
 export interface OrderCreate {
@@ -66,17 +67,18 @@ export interface OrderCreate {
 
 export interface OrderItemResponse {
   id: number;
-  order_id: number;
-  laptop_id?: number;
+  laptopId?: number;
+  mouseId?: number;
   quantity: number;
-  unit_price: number;
-  laptop?: Laptop;
+  unitPrice: number;
+  totalPrice: number;
+  productName: string;
+  productType: string;
 }
 
 export interface Order {
   id: number;
-  user_id: number;
-  total_amount: number;
+  totalAmount: number;
   status: string;
   items: OrderItemResponse[];
   created_at: string;

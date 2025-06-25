@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.util.List;
+
 
 @Entity
 @Table(name = "users")
@@ -31,8 +31,7 @@ public class User {
     @JsonProperty("created_at")
     private LocalDateTime createdAt;
     
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Order> orders;
+
     
     @PrePersist
     protected void onCreate() {
@@ -89,11 +88,5 @@ public class User {
         this.createdAt = createdAt;
     }
     
-    public List<Order> getOrders() {
-        return orders;
-    }
-    
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
+
 }

@@ -1,28 +1,25 @@
 # 🚀 Laptop Store Backend - Java Spring Boot
 
-A modern, production-ready Spring Boot backend for the Laptop Store e-commerce platform. This API supports both laptops and computer mice products with advanced features like mixed cart functionality, JWT authentication, and comprehensive order management.
+A modern Spring Boot backend for the Laptop Store e-commerce platform. This API supports laptop products with JWT authentication and order management.
 
 ## ✨ Features
 
 ### 🛍️ E-commerce Core
 - **Product Management**: 
   - Complete laptop catalog (10 latest 2024-2025 models)
-  - Computer mice collection (12 modern gaming/productivity mice)
-  - Individual product detail endpoints with search functionality
+  - Individual product detail endpoints
   - Stock quantity tracking and management
 - **🔐 User Authentication**:
   - JWT token-based authentication with Spring Security
   - Secure password hashing with BCrypt
   - User registration and login endpoints
   - Token-based session management
-- **🛒 Advanced Order System**:
-  - Mixed product orders (laptops + mice in single order)
-  - Order status management (PENDING → PROCESSING → SHIPPED → DELIVERED → CANCELLED)
-  - Order cancellation for pending orders
-  - Complete order history per user
+- **🛒 Order System**:
+  - Laptop order creation and management
+  - Order history per user
+  - Basic order status (PENDING)
 - **📊 RESTful API**:
   - Clean REST endpoint design
-  - Automatic OpenAPI/Swagger documentation
   - Request/response validation with Jakarta Bean Validation
   - Comprehensive error handling and responses
 
@@ -30,8 +27,7 @@ A modern, production-ready Spring Boot backend for the Laptop Store e-commerce p
 - **🎯 Clean Architecture**: Layered architecture with clear separation of concerns
 - **🔄 Service Layer Pattern**: Business logic abstraction from controllers
 - **🛡️ Security First**: Spring Security integration with JWT, CORS configuration
-- **📝 Well Documented**: Comprehensive code documentation and API specs
-- **🧪 Test Ready**: Structured for comprehensive testing with Spring Boot Test
+- **📝 Well Documented**: Comprehensive code documentation
 
 ## 🛠️ Tech Stack
 
@@ -54,24 +50,20 @@ backend/
 │   ├── controller/                    # REST controllers
 │   │   ├── AuthController.java        # Authentication endpoints
 │   │   ├── LaptopController.java      # Laptop CRUD operations
-│   │   ├── MouseController.java       # Mouse CRUD operations
 │   │   ├── OrderController.java       # Order management
 │   │   └── HealthController.java      # Health check endpoints
 │   ├── service/                       # Business logic layer
 │   │   ├── UserService.java           # User management
 │   │   ├── LaptopService.java         # Laptop operations
-│   │   ├── MouseService.java          # Mouse operations
 │   │   └── OrderService.java          # Order processing
 │   ├── repository/                    # Data access layer
 │   │   ├── UserRepository.java        # User data operations
 │   │   ├── LaptopRepository.java      # Laptop queries
-│   │   ├── MouseRepository.java       # Mouse queries
 │   │   ├── OrderRepository.java       # Order data access
 │   │   └── OrderItemRepository.java   # Order item operations
 │   ├── entity/                        # JPA entities
 │   │   ├── User.java                  # User entity
 │   │   ├── Laptop.java                # Laptop product entity
-│   │   ├── Mouse.java                 # Mouse product entity
 │   │   ├── Order.java                 # Order entity
 │   │   └── OrderItem.java             # Order item entity
 │   ├── dto/                           # Data Transfer Objects
@@ -79,7 +71,13 @@ backend/
 │   │   ├── UserLoginDto.java          # Login request
 │   │   ├── JwtResponseDto.java        # JWT token response
 │   │   ├── OrderCreateDto.java        # Order creation request
+│   │   ├── OrderItemCreateDto.java    # Order item request
+│   │   ├── OrderResponseDto.java      # Order response
+│   │   ├── OrderItemResponseDto.java  # Order item response
+│   │   ├── UserResponseDto.java       # User response
 │   │   └── MessageResponseDto.java    # Generic message response
+│   ├── exception/                     # Exception handling
+│   │   └── GlobalExceptionHandler.java # Global error handler
 │   └── security/                      # Security configuration
 │       ├── SecurityConfig.java        # Spring Security config
 │       ├── JwtTokenProvider.java      # JWT token utilities
@@ -123,12 +121,11 @@ mvn clean package
 java -jar target/laptop-store-backend-1.0.0.jar
 ```
 
-The API will be available at `http://localhost:8080`
+The API will be available at `http://localhost:8000`
 
 ### 🔍 Explore the API
-- **📖 Swagger UI**: http://localhost:8080/swagger-ui.html (when configured)
-- **🏥 Health Check**: http://localhost:8080/health
-- **🗄️ H2 Console**: http://localhost:8080/h2-console (dev only)
+- **🏥 Health Check**: http://localhost:8000/health
+- **🗄️ H2 Console**: http://localhost:8000/h2-console (dev only)
   - JDBC URL: `jdbc:h2:mem:laptopstore`
   - Username: `sa`
   - Password: (empty)
@@ -180,13 +177,11 @@ CREATE TABLE orders (
 CREATE TABLE order_items (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     order_id BIGINT NOT NULL,
-    laptop_id BIGINT NULL,
-    mouse_id BIGINT NULL,
+    laptop_id BIGINT NOT NULL,
     quantity INTEGER NOT NULL,
     unit_price DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders (id),
-    FOREIGN KEY (laptop_id) REFERENCES laptops (id),
-    FOREIGN KEY (mouse_id) REFERENCES mice (id)
+    FOREIGN KEY (laptop_id) REFERENCES laptops (id)
 );
 ```
 
@@ -204,10 +199,6 @@ GET /health                     # Health status
 ```http
 GET /api/v1/laptops            # Get all laptops
 GET /api/v1/laptops/{id}       # Get laptop by ID
-GET /api/v1/laptops/available  # Get available laptops
-GET /api/v1/laptops/search?q=  # Search laptops
-GET /api/v1/mice               # Get all mice
-GET /api/v1/mice/{id}          # Get mouse by ID
 ```
 
 #### Authentication
@@ -222,8 +213,6 @@ POST /api/v1/auth/login        # User login (returns JWT)
 ```http
 GET /api/v1/orders             # Get user's orders
 POST /api/v1/orders            # Create new order
-GET /api/v1/orders/{id}        # Get specific order
-DELETE /api/v1/orders/{id}     # Cancel order (pending only)
 ```
 
 ## 📋 Request/Response Examples
@@ -288,7 +277,7 @@ GET /api/v1/laptops
 
 ### Orders
 
-#### Create Mixed Order
+#### Create Order
 ```http
 POST /api/v1/orders
 Authorization: Bearer <jwt_token>
@@ -298,15 +287,13 @@ Content-Type: application/json
     "items": [
         {
             "laptopId": 1,
-            "mouseId": null,
             "quantity": 1,
             "unitPrice": 2999.99
         },
         {
-            "laptopId": null,
-            "mouseId": 5,
+            "laptopId": 5,
             "quantity": 2,
-            "unitPrice": 149.99
+            "unitPrice": 3199.99
         }
     ]
 }
@@ -332,17 +319,9 @@ Content-Type: application/json
 # Run all tests
 mvn test
 
-# Run with coverage
-mvn test jacoco:report
-
 # Run specific test class
 mvn test -Dtest=UserServiceTest
 ```
-
-### Test Structure
-- **Unit Tests**: Service layer business logic testing
-- **Integration Tests**: Full application context testing
-- **Security Tests**: Authentication and authorization testing
 
 ## ⚙️ Configuration
 
@@ -358,7 +337,7 @@ SPRING_DATASOURCE_USERNAME=your_username
 SPRING_DATASOURCE_PASSWORD=your_password
 
 # Server Configuration
-SERVER_PORT=8080
+SERVER_PORT=8000
 ```
 
 ### Application Profiles
@@ -375,55 +354,27 @@ logging.level.com.example.laptopstore=INFO
 ### Building for Production
 ```bash
 # Create production JAR
-mvn clean package -Pprod
+mvn clean package
 
-# Build Docker image (when Dockerfile is added)
-docker build -t laptop-store-backend .
+# Run the JAR
+java -jar target/laptop-store-backend-1.0.0.jar
 ```
 
-### Production Checklist
-- [ ] **Change JWT Secret**: Use secure, random secret key
-- [ ] **Database Migration**: Move to PostgreSQL or MySQL
-- [ ] **Environment Variables**: Externalize all configuration
-- [ ] **HTTPS Configuration**: SSL/TLS encryption
-- [ ] **Monitoring**: Add application monitoring (Actuator, Micrometer)
-- [ ] **Logging**: Configure structured logging
-- [ ] **Health Checks**: Configure health check endpoints
-- [ ] **Security Headers**: Add security headers middleware
+### Production Considerations
+- **Change JWT Secret**: Use secure, random secret key
+- **Database Migration**: Move to PostgreSQL or MySQL
+- **Environment Variables**: Externalize all configuration
+- **HTTPS Configuration**: SSL/TLS encryption
 
 ## 🔧 Development Tools
 
 ### Code Quality
 ```bash
-# Format code (when configured)
-mvn spotless:apply
-
-# Static analysis
-mvn spotbugs:check
-
-# Dependency check
-mvn dependency-check:check
-```
-
-### Database Tools
-```bash
-# Generate JPA metamodel
+# Compile the project
 mvn compile
 
-# Validate database schema
-mvn flyway:validate
-```
-
-## 📚 API Documentation
-
-### Swagger/OpenAPI Integration
-To add Swagger documentation, include in `pom.xml`:
-```xml
-<dependency>
-    <groupId>org.springdoc</groupId>
-    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-    <version>2.2.0</version>
-</dependency>
+# Run tests
+mvn test
 ```
 
 ## 🤝 Contributing
@@ -431,20 +382,13 @@ To add Swagger documentation, include in `pom.xml`:
 ### Development Workflow
 1. **Setup Environment**: Java 17, Maven, IDE
 2. **Code Style**: Follow Java conventions and Spring Boot best practices
-3. **Testing**: Write comprehensive tests for new features
+3. **Testing**: Write tests for new features
 4. **Documentation**: Update JavaDoc and README
 5. **Security**: Ensure no security vulnerabilities
 
-### Code Review Checklist
-- [ ] **Functionality**: Feature works as expected
-- [ ] **Testing**: Adequate test coverage
-- [ ] **Security**: No security vulnerabilities
-- [ ] **Performance**: Efficient implementation
-- [ ] **Documentation**: Clear code and API documentation
-
 ## 📄 License
 
-This Spring Boot backend is designed for educational purposes and demonstrates production-ready API development practices with modern Java frameworks.
+This Spring Boot backend is designed for educational purposes and demonstrates API development practices with modern Java frameworks.
 
 ---
 
