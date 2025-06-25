@@ -99,12 +99,8 @@ const Exercises: React.FC = () => {
                     <br />💡 <strong>Role-Based Prompt:</strong> "As a senior React developer, show me three different ways to safely handle this error type: 1) Type guards approach, 2) Helper function approach, 3) Simplified error handling approach. Explain pros/cons of each."
                     </li>
                     
-                    <li><strong>Step 4: Implementation Strategy</strong>
-                    <br />💡 <strong>Few-Shot Prompting:</strong> "Show me before/after code examples for fixing this. Before: `errors.general.message.toUpperCase()` (crashes). After: Safe version that handles both string and object types."
-                    </li>
-                    
-                    <li><strong>Step 5: Comprehensive Testing</strong>
-                    <br />💡 <strong>Systematic Prompt:</strong> "Create a testing checklist for this fix: 1) Test invalid credentials, 2) Test network errors, 3) Test valid login, 4) Test edge cases. What specific scenarios should I verify?"
+                    <li><strong>Step 4: Implementation & Testing</strong>
+                    <br />💡 <strong>Few-Shot Prompting:</strong> "Show me before/after code examples for fixing this. Before: `errors.general.message.toUpperCase()` (crashes). After: Safe version that handles both string and object types. Include test scenarios for invalid credentials and valid login."
                     </li>
                   </ul>
                   
@@ -131,12 +127,13 @@ const Exercises: React.FC = () => {
                       <br />💡 <strong>Mentor Prompt:</strong> "Act as a React mentor for beginners. Analyze this LaptopCard component and explain: 1) Current structure and props, 2) Where I should add a favorite heart icon, 3) What React concepts I'll need (useState, event handlers, conditional rendering), 4) How localStorage integration works."
                     </li>
                     
-                    <li><strong>Step 2: Custom Hook Development</strong>
-                      <br />💡 <strong>Pattern-Based Prompt:</strong> "Show me how to create a `useFavorites()` custom hook following React best practices. Include: 1) useState for favorites array, 2) useEffect for localStorage sync, 3) addFavorite and removeFavorite functions, 4) isFavorite checker function. Explain each part."
+                    <li><strong>Step 2: Context Development</strong>
+                      <br />📁 <code>frontend/src/contexts/CartContext.tsx</code>
+                      <br />💡 <strong>Pattern-Based Prompt:</strong> "Show me how to create a `FavoritesContext.tsx` following React best practices like CartContext. Include: 1) FavoritesProvider component, 2) useState for favorites array, 3) useEffect for localStorage sync, 4) addFavorite, removeFavorite, and isFavorite functions. Explain each part."
                     </li>
                     
                     <li><strong>Step 3: UI Implementation with Guidance</strong>
-                      <br />📁 <code>frontend/src/components/Laptop/LaptopCard.tsx</code>, your custom <code>useFavorites</code> hook from Step 2
+                      <br />📁 <code>frontend/src/components/Laptop/LaptopCard.tsx</code>, your custom FavoritesContext from Step 2
                       <br />💡 <strong>Step-by-Step Prompt:</strong> "Guide me through adding the heart icon step by step: 1) Import useFavorites hook, 2) Add heart icon (🤍/❤️) with absolute positioning, 3) Add click handler with event.stopPropagation(), 4) Show me the exact JSX and explain each part."
                     </li>
                     
@@ -145,13 +142,9 @@ const Exercises: React.FC = () => {
                       <br />💡 <strong>Design-Focused Prompt:</strong> "As a UI/UX designer, help me style the favorite heart: 1) Position absolutely in top-right corner, 2) Add hover effects and transitions, 3) Ensure accessibility (focus states), 4) Make it responsive. Provide complete CSS with explanations."
                     </li>
                     
-                    <li><strong>Step 5: Feature Extension</strong>
+                    <li><strong>Step 5: Favorites Page Creation</strong>
                       <br />📁 <code>frontend/src/pages/Laptops.tsx</code>, <code>frontend/src/App.tsx</code>, <code>frontend/src/components/Layout/Header.tsx</code>
                       <br />💡 <strong>Architecture Prompt:</strong> "Now let's create a Favorites page. Show me: 1) How to create Favorites.tsx component, 2) Filter laptops by favorites, 3) Handle empty state, 4) Add navigation link, 5) Update App.tsx routing. Follow the existing patterns in Laptops.tsx."
-                    </li>
-                    
-                    <li><strong>Step 6: Testing & Validation</strong>
-                      <br />💡 <strong>QA Prompt:</strong> "Act as a QA tester. Create a comprehensive testing plan: 1) Functional tests (add/remove favorites), 2) Edge cases (localStorage disabled, empty favorites), 3) User experience tests, 4) Cross-browser compatibility. Give me a testing checklist."
                     </li>
                   </ul>
                   
@@ -208,14 +201,6 @@ const Exercises: React.FC = () => {
                       <br />📁 <code>frontend/src/pages/Laptops.tsx</code>, <code>frontend/src/App.tsx</code>, <code>frontend/src/components/Layout/Header.tsx</code>, your MouseCard component from Step 4
                       <br />💡 <strong>Architecture Prompt:</strong> "Create complete Mice page following Laptops.tsx pattern: 1) State management, 2) Loading states, 3) Error handling, 4) Search/filter functionality, 5) Routing setup. Maintain architectural consistency."
                     </li>
-                    
-                    <li><strong>Step 6: Mixed Cart Testing</strong>
-                      <br />💡 <strong>Integration Testing Prompt:</strong> "Our backend supports mixed laptop+mice orders! Create a comprehensive test plan: 1) Add both products to cart, 2) Test quantity updates, 3) Verify checkout process, 4) Test order completion. What scenarios should I validate?"
-                    </li>
-                    
-                    <li><strong>Step 7: Advanced Features</strong>
-                      <br />💡 <strong>Enhancement Prompt:</strong> "Add mice-specific features: 1) Filter by mouse type (gaming/productivity), 2) Sort by DPI, 3) Filter by connectivity, 4) RGB lighting indicator. Follow existing laptop filtering patterns and maintain UI consistency."
-                    </li>
                   </ul>
                   
                   <div className="api-reference">
@@ -266,14 +251,6 @@ const Exercises: React.FC = () => {
                     <li><strong>Step 4: UI/UX Implementation</strong>
                       <br />📁 <code>frontend/src/pages/Orders.tsx</code>, your deleteOrder service method from Step 2, <code>frontend/src/components/Laptop/LaptopCard.tsx</code>
                       <br />💡 <strong>UX Designer Prompt:</strong> "Design the cancellation UX: 1) When to show cancel button (only pending), 2) Confirmation dialog design, 3) Loading states, 4) Success/error feedback, 5) Optimistic updates. Focus on preventing user mistakes."
-                    </li>
-                    
-                    <li><strong>Step 5: Testing & Validation</strong>
-                      <br />💡 <strong>QA Testing Prompt:</strong> "Create comprehensive test scenarios: 1) Happy path (cancel pending order), 2) Error cases (cancel shipped order), 3) Network failures, 4) Concurrent operations, 5) UI state consistency. Include manual testing steps."
-                    </li>
-                    
-                    <li><strong>Step 6: Advanced Features</strong>
-                      <br />💡 <strong>Enhancement Prompt:</strong> "Add advanced features: 1) Bulk cancellation, 2) Cancellation reasons, 3) Undo functionality (time-limited), 4) Real-time order status updates. Maintain backward compatibility."
                     </li>
                   </ul>
                   
