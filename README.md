@@ -169,6 +169,10 @@ cd e_commerce_store
 
 # For Windows:
 start-dev.bat
+
+# Or use npm scripts:
+npm run dev              # Start both backend and frontend
+npm run dev:frontend     # Start only frontend (for frontend development)
 ```
 
 #### Option 2: Manual Setup
@@ -227,6 +231,30 @@ cd frontend
 npm run build    # Verify TypeScript compilation
 npm test         # Run test suite
 ```
+
+### 🛠️ Available Scripts
+
+The project now includes convenient npm scripts for development:
+
+```bash
+# Development
+npm run dev              # Start both backend and frontend servers
+npm run dev:frontend     # Start only frontend (for frontend development)
+
+# Frontend Management
+npm run install:frontend # Install frontend dependencies
+npm run build:frontend   # Build frontend for production
+npm run test:frontend    # Run frontend tests
+```
+
+### ✨ Improved Startup Scripts
+
+The startup scripts have been enhanced with:
+- ✅ **Automatic prerequisite checks** for Node.js, npm, and Maven
+- ✅ **Automatic dependency installation** for frontend packages
+- ✅ **Better error handling** with immediate feedback
+- ✅ **Process health checks** to ensure servers start successfully
+- ✅ **Detailed logging** and troubleshooting information
 
 ### ⚠️ Troubleshooting Common Issues
 

@@ -1,0 +1,19 @@
+{
+  "name": "e-commerce-store",
+  "version": "1.0.0",
+  "description": "E-commerce Store with Spring Boot backend and React frontend",
+  "scripts": {
+    "dev": "./start-dev.sh",
+    "dev:frontend": "./start-frontend.sh",
+    "install:frontend": "cd frontend && npm install",
+    "build:frontend": "cd frontend && npm run build",
+    "test:frontend": "cd frontend && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mshnjffr/e_commerce_store"
+  },
+  "keywords": ["e-commerce", "spring-boot", "react", "typescript"],
+  "author": "",
+  "license": "ISC"
+}
